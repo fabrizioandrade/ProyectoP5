@@ -1,1 +1,3 @@
 # BACK
+
+npm run server
