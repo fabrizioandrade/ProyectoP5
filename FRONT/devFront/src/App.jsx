@@ -1,11 +1,12 @@
 import './App.css'
+import AuthWrapper from './common/AuthWrapper'
 
 function App() {
 
   return (
-    <>
-      <h1>hola</h1>
-    </>
+< > 
+<AuthWrapper/>   
+</>
   )
 }
 
