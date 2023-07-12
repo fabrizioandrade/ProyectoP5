@@ -9,5 +9,8 @@ DB_USER = 'null'
 DB_PASSWORD = 'null'
 DB_DIALECT = "postgres"
 
+SECRET_TOKEN='devHouse'  //este es el secret para generar el token
+
+ADMIN_TOKEN='IamAdmin'  //token para ingresar y registrate como admin
 
 reemplazar si es enecesario con tus datos(db_user y db_password) para que la conexion a postgres sea exitosa
