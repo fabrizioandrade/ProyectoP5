@@ -4,8 +4,7 @@ const morgan = require('morgan');
 const app=express()
 const cors=require('cors');
 const { DB_PORT } = require('./config');
-const db = require('./config/db');
-
+const db=require('./models')
 
 
 
