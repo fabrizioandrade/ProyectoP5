@@ -6,6 +6,7 @@ const Users = require("../models/Users");
 const createUser = async (req, res) => {
     try {
       const { name, email, password, phone, code } = req.body;
+      console.log(req.body);
   
       let user = await Users.findOne({ where: { email: email } });
       if (user) {
