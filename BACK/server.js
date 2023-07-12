@@ -4,7 +4,8 @@ const morgan = require('morgan');
 const app=express()
 const cors=require('cors');
 const { DB_PORT } = require('./config');
-const db=require('./models')
+const db=require('./models');
+const router = require('./routes');
 
 
 
@@ -64,6 +65,17 @@ app.use(
     })
   );
 
+/**
+ * Middleware para manejar las rutas de la API.
+ * 
+ * @name routes
+ * @type {Router}
+ * @memberof module:app
+ */
+
+app.use("/api", routes);
+
+
 
   /**
  * Ruta de inicio para verificar si el servidor está funcionando correctamente.
@@ -75,7 +87,7 @@ app.use(
  * @param {Object} res - Objeto de respuesta HTTP.
  */
   app.get("/", (req, res) => {
-    res.send("<h1>TRASH TALK</h1>");
+    res.send("<h1>dev house</h1>");
   });
 
   
