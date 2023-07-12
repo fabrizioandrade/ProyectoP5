@@ -73,7 +73,7 @@ app.use(
  * @memberof module:app
  */
 
-app.use("/api", routes);
+app.use("/api", router);
 
 
 
