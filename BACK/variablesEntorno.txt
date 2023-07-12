@@ -1,0 +1,13 @@
+crear un archivo .env en la raiz de la carpeta BACK. Debe contener la siguiente informacion (copiar y pegar)
+
+
+# SERVER
+DB_PORT = 3000
+DB_HOST = 'localhost'
+DB_NAME = 'devhouse'
+DB_USER = 'null'
+DB_PASSWORD = 'null'
+DB_DIALECT = "postgres"
+
+
+reemplazar si es enecesario con tus datos(db_user y db_password) para que la conexion a postgres sea exitosa
