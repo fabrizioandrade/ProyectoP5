@@ -1,3 +1,9 @@
+
+/**
+ * Configuración de variables de entorno para la base de datos.
+ * @module config
+ */
+
 require("dotenv").config();
 
 module.exports = {
