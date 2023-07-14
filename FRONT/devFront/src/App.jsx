@@ -9,14 +9,14 @@ import { useEffect } from 'react';
 
 function App() {
   const user = useSelector((state) => state.user);
-  const navigate = useNavigate();
 
 
   return (
     <div>
 
       <Routes>
-        {user.name?<Route path="/inicio" element={<Navbar />} />:<Route path="/" element={<AuthWrapper />} />}
+        <Route path="/inicio" element={<Navbar />} />
+        <Route path="/" element={<AuthWrapper />} />
         
       </Routes>
     </div>

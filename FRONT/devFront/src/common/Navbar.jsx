@@ -37,7 +37,7 @@ const navigate=useNavigate()
 
   return (
 <div>
-{user && (
+{user.name && (
         <>
           <p>Bienvenido {user.name}</p>
           <button onClick={handleLogout}>Cerrar sesión</button>
