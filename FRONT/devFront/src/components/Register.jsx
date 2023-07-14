@@ -2,11 +2,18 @@ import React ,{useState} from 'react';
 import logo from '../assets/logo.png'
 import { setUser } from '../state/user';
 import {useDispatch,useSelector} from 'react-redux'
+import { Navigate, useNavigate } from 'react-router';
+import axios from 'axios';
 const Register = () => {
 const user=useSelector((state)=>state.user)
+const [name, setName] = useState("");
+const [email, setEmail] = useState("");
+const [password, setPassword] = useState("");
+const [confirmedPassword,setConfirmedPasword] = useState("");
+const [phone, setPhone] = useState("");
 const [isAdminCode, setIsAdminCode] = useState(false);
 const [adminCode, setAdminCode] = useState('');
-
+const navigate=useNavigate()
 const handleAdminCode = (e) => {
     setAdminCode(e.target.value);
   };
@@ -15,8 +22,37 @@ const handleAdminCode = (e) => {
 const handleAdminCodeToggle = () => {
     setIsAdminCode(!isAdminCode);
   };
+
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (password === confirmedPassword) {
+      axios
+        .post("http://localhost:3000/api/users/register", {
+          name: name,
+          password: password,
+          email: email,
+          phone: phone,
+          code: adminCode,
+        })
+        .then((res) => {
+          const { success, message } = res.data;
+          if (success) {
+            alert(message);
+            navigate("/login");
+          } else {
+            alert(message);
+          }
+        })
+        .catch((error) => {
+          alert(error.response.data);
+        });
+    } else {
+      alert("Las contraseñas no coinciden");
+    }
+  };
   return (
-    <div>
+    <div > 
       <section className="bg-gray-50 dark:bg-gray-900">
         <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
           <a href="#" className="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
@@ -28,26 +64,29 @@ const handleAdminCodeToggle = () => {
               <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
 Registrarse             
  </h1>
-              <form className="space-y-4 md:space-y-6" action="#">
+              <form className="space-y-4 md:space-y-6" action="#" onSubmit={handleSubmit}>
               <div>
                   <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name</label>
-                  <input type="text" name="name" id="name" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="username" required="" />
+                  <input onChange={()=>setName(e.target.value)} type="text" name="name" id="name" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="username" required="" />
                 </div>
                 <div>
                   <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
-                  <input type="email" name="email" id="email" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@company.com" required="" />
+                  <input 
+                onChange={(e) => setEmail(e.target.value)}
+                type="email" name="email" id="email" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@company.com" required="" />
                 </div>
                 <div>
                   <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
-                  <input type="password" name="password" id="password" placeholder="••••••••" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="" />
+                  <input onChange={(e) => setPassword(e.target.value)} type="password" name="password" id="password" placeholder="••••••••" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="" />
                 </div>
                 <div>
                   <label htmlFor="confirm-password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Confirm password</label>
-                  <input type="confirm-password" name="confirm-password" id="confirm-password" placeholder="••••••••" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="" />
+                  <input onChange={(e)=>setConfirmedPasword(e.target.value)} type="password" name="confirm-password" id="confirm-password" placeholder="••••••••" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="" />
                 </div>
+                {password !== confirmedPassword && <p>Las contraseñas no coinciden</p>}
                 <div>
                   <label htmlFor="phone" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">phone</label>
-                  <input type="tel" name="phone" id="phone" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="phone number" required="" />
+                  <input onChange={(e)=>setPhone(e.target.value)} type="tel" name="phone" id="phone" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="phone number" required="" />
                 </div>
                 <div>
           <label htmlFor="admin-code">Do you have an admin code?</label>
