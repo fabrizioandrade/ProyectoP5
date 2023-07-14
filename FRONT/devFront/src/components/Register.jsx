@@ -12,7 +12,9 @@ const [adminCode, setAdminCode] = useState('');
 
 
 const namePattern = /^[a-zA-Z\s]+$/; // Solo letras y espacios
-const phonePattern = /^\d+$/; 
+const phonePattern = /^\d+$/;
+
+
 const handleAdminCode = (e) => {
     setAdminCode(e.target.value);
   };

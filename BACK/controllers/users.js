@@ -40,7 +40,7 @@ const createUser = async (req, res) => {
         .status(400);
     }
   } catch (error) {
-    return res.status(400).send({
+    return res.status(500).send({
       success: false,
       message: "Hubo un error en el registro",
     });
