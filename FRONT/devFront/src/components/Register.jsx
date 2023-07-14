@@ -1,11 +1,7 @@
 import React ,{useState} from 'react';
 import logo from '../assets/logo.png'
-import { setUser } from '../state/user';
-import {useDispatch,useSelector} from 'react-redux'
-import { Navigate, useNavigate } from 'react-router';
 import axios from 'axios';
 const Register = ({toggleAuthComponent}) => {
-const user=useSelector((state)=>state.user)
 const [name, setName] = useState("");
 const [email, setEmail] = useState("");
 const [password, setPassword] = useState("");
@@ -13,7 +9,6 @@ const [confirmedPassword,setConfirmedPasword] = useState("");
 const [phone, setPhone] = useState("");
 const [isAdminCode, setIsAdminCode] = useState(false);
 const [adminCode, setAdminCode] = useState('');
-const navigate=useNavigate()
 
 
 const namePattern = /^[a-zA-Z\s]+$/; // Solo letras y espacios
@@ -43,8 +38,7 @@ const handleAdminCodeToggle = () => {
           const { success, message } = res.data;
           if (success) {
             alert(message);
-            navigate("/login");
-          } else {
+            toggleAuthComponent();
             alert(message);
           }
         })

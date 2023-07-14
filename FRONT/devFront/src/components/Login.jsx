@@ -47,7 +47,7 @@ export const Login = ({toggleAuthComponent}) => {
             );
 
             // Mover la navegación a la página principal aquí
-            navigate("/");
+            navigate("/inicio");
           })
           .catch((error) => {
             if (error.response && error.response.status === 403) {
