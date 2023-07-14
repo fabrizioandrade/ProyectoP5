@@ -7,13 +7,13 @@ import { Route, Routes } from "react-router";
 function App() {
 
   return (
-< > 
+<div > 
 <AuthWrapper/> 
-<Routes>
+{/* <Routes>
         <Route path={"/register"} element={<Register />} />
         <Route path={"/login"} element={<Login />} />
-</Routes>
-</>
+</Routes> */}
+</div>
   )
 }
 
