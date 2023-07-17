@@ -1,7 +1,7 @@
-const Users = require("./Users");
-const Properties = require("./Properties");
-const Appointments = require("./Appointments");
-const Favorites = require("./Favorites");
+const Users = require("./Users.models");
+const Properties = require("./Properties.models.");
+const Appointments = require("./Appointments.models.");
+const Favorites = require("./Favorites.models.");
 const db = require("../config/db");
 
 // Users.hasMany(Appointments, { foreignKey: "userId", as: "Appointments" });
@@ -29,22 +29,21 @@ const db = require("../config/db");
 //   as: "FavoriteProperties"
 // });
 
+Users.hasMany(Appointments);
+Appointments.belongsTo(Users);
 
-Users.hasMany(Appointments)
-Appointments.belongsTo(Users)
+Users.hasMany(Favorites);
+Favorites.belongsTo(Users);
 
-Users.hasMany(Favorites)
-Favorites.belongsTo(Users)
-
-Properties.hasMany(Appointments)
-Appointments.belongsTo(Properties)
+Properties.hasMany(Appointments);
+Appointments.belongsTo(Properties);
 
 Properties.belongsToMany(Favorites, {
-    through: "PropertyFavorites", // Nombre de la tabla intermedia
-  });
-  
-  Favorites.belongsToMany(Properties, {
-    through: "PropertyFavorites", // Nombre de la tabla intermedia
-  });
+  through: "PropertyFavorites", // Nombre de la tabla intermedia
+});
 
-module.exports = db
+Favorites.belongsToMany(Properties, {
+  through: "PropertyFavorites", // Nombre de la tabla intermedia
+});
+
+module.exports = db;
