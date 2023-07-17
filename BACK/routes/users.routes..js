@@ -1,5 +1,5 @@
 const express = require("express");
-const { createUser,loginUser,logOut } = require("../controllers/users");
+const { createUser,loginUser,logOut } = require("../controllers/users.controllers");
 const validateUser = require("../middlewares/auth");
 const Joi=require('joi')
 const userRouter=express.Router()
