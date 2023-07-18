@@ -6,6 +6,7 @@ const cors = require("cors");
 const { DB_PORT } = require("./config/envs");
 const db = require("./models");
 const router = require("./routes");
+const fillProperties = require("./utils/api.utils");
 
 /**
  * Middleware para registrar las solicitudes y respuestas en la consola durante el desarrollo.
@@ -50,6 +51,12 @@ app.use(
   })
 );
 
+
+// fillProperties()
+
+
+
+
 /**
  * Middleware para manejar las rutas de la API.
  *
@@ -81,7 +88,7 @@ app.get("/", (req, res) => {
  * @name db.sync
  * @param {Object} options - Opciones de sincronización de la base de datos.
  */
-db.sync({ force: false }).then(() => {
+db.sync({ force:false }).then(() => {
   app.listen(DB_PORT, () => {
     console.log(`Servidor escuchando en el puerto ${DB_PORT}`);
   });

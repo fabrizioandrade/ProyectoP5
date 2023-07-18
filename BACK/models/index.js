@@ -1,8 +1,8 @@
 const Users = require("./Users.models");
-const Properties = require("./Properties.models.");
 const Appointments = require("./Appointments.models.");
 const Favorites = require("./Favorites.models.");
 const db = require("../config/db");
+const Properties = require("./Properties.models.");
 
 Users.hasMany(Appointments);
 Appointments.belongsTo(Users);

@@ -18,6 +18,10 @@ Properties.init(
       type: Sequelize.TEXT,
       allowNull: false,
     },
+    descriptionData:{
+      type:Sequelize.JSON,
+      allowNull:false
+    },
     category: {
       type: Sequelize.STRING,
       allowNull: false,
@@ -25,6 +29,10 @@ Properties.init(
     status: {
       type: Sequelize.BOOLEAN,
       defaultValue: true,
+    },
+    statusType:{
+      type:Sequelize.STRING,
+      allowNull:false
     },
     price: {
       type: Sequelize.DECIMAL(10, 2),
