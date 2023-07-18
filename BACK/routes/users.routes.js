@@ -1,7 +1,7 @@
 const express = require("express");
 const { createUser,loginUser,logOut } = require("../controllers/users.controllers");
-const validateUser = require("../middlewares/auth");
-const Joi=require('joi')
+const validateUser = require("../middlewares/auth.middleware");
+const Joi=require('joi');
 const userRouter=express.Router()
 
 
@@ -28,4 +28,6 @@ userRouter.post('/logout',logOut)
 userRouter.get("/me", validateUser, (req, res) => {
     res.status(200).send({ status: "OK", ...req.user });
   });
+
+
 module.exports=userRouter;
