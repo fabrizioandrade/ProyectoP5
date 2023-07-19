@@ -115,7 +115,7 @@ const UserService = {
   getOneUser:async(id)=>{
     try {
       const user = await Users.findByPk(id, {
-        attributes: ["id", "name", "email"],
+        attributes: ["id", "name", "email","phone","role"],
       });
   
       if (user) {
@@ -124,7 +124,7 @@ const UserService = {
         throw new Error("Usuario no encontrado.");
       }
     } catch (error) {
-      throw new Error("error al obtener el usuario");
+      throw new Error("error al obtener el");
     }
   } 
 
