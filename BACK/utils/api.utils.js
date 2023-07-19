@@ -2,23 +2,9 @@ const Properties = require("../models/Properties.models.");
 const axios = require("axios");
 const { faker } = require('@faker-js/faker');
 
-// const options = {
-//   method: "GET",
-//   url: "https://realtor16.p.rapidapi.com/forsale",
-//   params: {
-//     location: "santa monica",
-//     type: "single_family,condos",
-//   },
-//   headers: {
-//     "X-RapidAPI-Key": "af11d4ca37mshef0ef8628c328cap14ec1ejsn38ceccdb80c4",
-//     "X-RapidAPI-Host": "realtor16.p.rapidapi.com",
-//   },
-// };
-
 const propertiesForSale = async () => {
   try {
-    // const response = await axios.request(options);
-    // const results = response.data.home_search.results;
+   
     const properties = [];
     for (let i = 1; i <= 50; i++) {
       const property = {
