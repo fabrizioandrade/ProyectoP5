@@ -31,7 +31,7 @@ const getSingleProperty=async(req,res)=>{
 const getPropertyType=async(req,res)=>{
   try {
     const properties = await Properties.findAll({
-      where: { statusType: req.params.statusType },
+      where: { statusType: req.params.type },
     });
 
     if (properties.length > 0) {
@@ -59,8 +59,8 @@ const deleteProperty=async(req,res)=>{
 
   try {
     // Eliminar las relaciones asociadas
-    await Appointments.destroy({ where: { PropertyId: propertyId } });
-    await Favorites.destroy({ where: { PropertyId: propertyId } });
+    await Appointments.destroy({ where: { propertyId: propertyId } });
+    
 
     // Eliminar la propiedad
     await Properties.destroy({ where: { id: propertyId } });
