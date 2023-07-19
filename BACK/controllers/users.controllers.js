@@ -49,4 +49,23 @@ const logOut = (req, res) => {
     });
   }
 };
-module.exports = { createUser, loginUser, logOut };
+
+const getAllUsers=async(req,res)=>{
+  try {
+    const users = await UserService.getAllUsers();
+    res.send(users);
+  } catch (error) {
+    res.status(400).send("error al obtener usuarios");
+  }
+}
+
+const getOneUser=async(req,res)=>{
+  const id = req.params.id;
+  try {
+    const user = await UserService.getOneUser(id);
+    res.send(user);
+  } catch (error) {
+    res.status(400).send("error al obtener el usuario");
+  }
+}
+module.exports = { createUser, loginUser, logOut ,getAllUsers,getOneUser};

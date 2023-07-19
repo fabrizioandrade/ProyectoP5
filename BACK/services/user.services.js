@@ -100,6 +100,34 @@ const UserService = {
     res.clearCookie("token");
     res.sendStatus(204);
   },
+
+  getAllUsers:async()=>{
+    try {
+      const users = await Users.findAll({
+        attributes: ["id", "name", "email", "phone", "role"],
+      });
+  
+      return users;
+    } catch (error) {
+      throw new Error("No se encontraron usuarios");
+    }
+  },
+  getOneUser:async(id)=>{
+    try {
+      const user = await Users.findByPk(id, {
+        attributes: ["id", "name", "email"],
+      });
+  
+      if (user) {
+        return user;
+      } else {
+        throw new Error("Usuario no encontrado.");
+      }
+    } catch (error) {
+      throw new Error("error al obtener el usuario");
+    }
+  } 
+
 };
 
 module.exports = UserService;
