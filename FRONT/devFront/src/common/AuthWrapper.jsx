@@ -15,16 +15,13 @@ const AuthWrapper = () => {
     style={{ backgroundImage: `url(${foto})` }}
   >
     <div className="container mx-auto px-4">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="col-span-1">
+      <div className="grid grid-cols-1 md:grid-cols-3 ">
+        <div className="col-span-2 ">
           {showLogin ? (
             <Login toggleAuthComponent={toggleAuthComponent} />
           ) : (
             <Register toggleAuthComponent={toggleAuthComponent} />
           )}
-        </div>
-        <div className="col-span-1">
-       
         </div>
       </div>
     </div>

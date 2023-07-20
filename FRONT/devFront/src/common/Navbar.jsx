@@ -11,7 +11,6 @@ const Navbar = () => {
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const properties=useSelector((state)=>state.properties)
   const [typeProperty, setTypeProperty] = useState(null);
 
   const fetchData = async () => {
@@ -64,10 +63,10 @@ const Navbar = () => {
   return (
     <nav className="navbar bg-red-500 p-4 fixed top-0 left-0 w-full">
       <div className="container mx-auto flex justify-between items-center">
-        <div className="text-black transparent-text font-bold">HOD.</div>
+        <Link to={'/home'}><div className="text-black transparent-text font-bold">HOD.</div></Link>
         <div className="space-x-4">
         <button onClick={()=>setTypeProperty(null)} className="text-white hover:text-gray-200">Descubre</button>
-          <button onClick={()=>setTypeProperty('for_sale')}     className="text-white hover:text-gray-200">En venta</button>
+          <button onClick={()=>setTypeProperty('for_sale')}     className="text-white   focus:ring ">En venta</button>
           
           <button onClick={()=>setTypeProperty('for_rent')}  className="text-white hover:text-gray-200">En alquiler</button>
           {user.name ? (

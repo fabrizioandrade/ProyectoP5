@@ -10,8 +10,10 @@ function App() {
     <div>
 
       <Routes>
-        <Route path="/home" element={<Home />} />
+        <Route path="/home/*" element={<Home />} />
         <Route path="/" element={<AuthWrapper />} /> 
+      
+
       </Routes>
     </div>
   );
