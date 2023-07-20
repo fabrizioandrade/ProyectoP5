@@ -14,7 +14,7 @@ console.log(properties);
     <a href="#">
       <img src={property.imgURL[0]} alt="Property" className="h-80 w-72 object-cover rounded-t-xl" />
       <div className="px-4 py-3 w-72">
-        <span className="text-gray-400 mr-3 uppercase text-xs">{property.category}</span>
+        <span className="text-gray-400 mr-3 uppercase text-xs">{property.statusType}</span>
         <p className="text-lg font-bold text-black truncate block capitalize">{property.name}</p>
         <div className="flex items-center">
           <p className="text-lg font-semibold text-black cursor-auto my-3">{property.price}</p>

@@ -92,10 +92,13 @@ export const Login = ({toggleAuthComponent}) => {
                     <div className="flex items-center justify-between">
                         <div className="flex items-start">
                             <div className="flex items-center h-5">
-                              <input id="remember" aria-describedby="remember" type="checkbox" className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800" required="" />
                             </div>
                             <div className="ml-3 text-sm">
-                              <label htmlFor="remember" className="text-gray-500 dark:text-gray-300">Remember me</label>
+                            <button  onClick={()=>navigate('/home')} class="relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-blue-700 rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800">
+  <span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+      Guest
+  </span>
+</button>
                             </div>
                         </div>
                         <a href="#" className="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500">Forgot password?</a>
