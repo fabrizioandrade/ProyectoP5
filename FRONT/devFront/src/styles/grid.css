@@ -1,0 +1,93 @@
+/* .property {
+    margin: 10px;
+    border: 1px solid #ccc;
+    padding: 10px;
+  }
+  
+  .property-title {
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  .property-description {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  
+  .property-price {
+    font-size: 16px;
+    font-weight: bold;
+    color: red;
+  }
+  
+  .property-bedrooms {
+    font-size: 14px;
+    font-weight: bold;
+  }
+  
+  .property-bathrooms {
+    font-size: 14px;
+    font-weight: bold;
+  }
+  
+  .property-size {
+    font-size: 14px;
+    font-weight: bold;
+  }
+  
+  .property-location {
+    font-size: 14px;
+    font-weight: bold;
+  }
+  
+  .property-photos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 10px 0;
+  }
+  
+  .property-photo {
+    width: 200px;
+    height: 150px;
+    margin: 4px;
+  } */
+
+  .property {
+    display: flex;
+    margin: 10px;
+    border: 1px solid #ccc;
+    padding: 10px;
+  }
+  
+  .property-image {
+    float: left;
+    width: 200px;
+    height: 150px;
+    margin-right: 10px;
+  }
+  
+  .property-details {
+    float: right;
+    width: 100%;
+  }
+  
+  .property-title {
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  .property-location {
+    font-size: 14px;
+    font-weight: bold;
+  }
+  
+  .property-bedrooms {
+    font-size: 14px;
+    font-weight: bold;
+  }
+  
+  .property-bathrooms {
+    font-size: 14px;
+    font-weight: bold;
+  }

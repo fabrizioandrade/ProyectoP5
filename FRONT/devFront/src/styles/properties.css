@@ -1,0 +1,4 @@
+section {
+    padding-top: 80px; /* Ajusta el valor según el tamaño de tu navbar */
+    min-height: calc(100vh - 80px); /* Asegura que el contenido sea visible incluso si hay pocos productos */
+  }

@@ -41,13 +41,12 @@ export const Login = ({toggleAuthComponent}) => {
           })
           .then((tokenVerifyResponse) => {
             dispatch(setUser(tokenVerifyResponse.data));
-
             alert(
-              `Inicio de sesión exitoso: Bienvenido de regreso ${loginResponse.data.name} `
+              `Inicio de sesión exitoso: Bienvenido de regreso ${tokenVerifyResponse.data.name} `
             );
 
             // Mover la navegación a la página principal aquí
-            navigate("/inicio");
+            navigate("/home");
           })
           .catch((error) => {
             if (error.response && error.response.status === 403) {
