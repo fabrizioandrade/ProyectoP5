@@ -61,7 +61,7 @@ export const Login = ({toggleAuthComponent}) => {
       })
       .catch((error) => {
         if (error.response && error.response.data) {
-          alert(error.response.data);
+          alert(error.response.data.message);
         } else {
           alert("Ocurrió un error al procesar la solicitud.");
         }
