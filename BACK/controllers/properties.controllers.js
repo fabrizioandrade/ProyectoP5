@@ -1,5 +1,4 @@
 const Appointments = require("../models/Appointments.models.");
-const Favorites = require("../models/Favorites.models.");
 const Properties = require("../models/Properties.models.");
 
 
