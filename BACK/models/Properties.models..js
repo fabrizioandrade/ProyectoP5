@@ -18,9 +18,9 @@ Properties.init(
       type: Sequelize.TEXT,
       allowNull: false,
     },
-    descriptionData:{
-      type:Sequelize.JSON,
-      allowNull:false
+    descriptionData: {
+      type: Sequelize.JSON,
+      allowNull: false,
     },
     category: {
       type: Sequelize.STRING,
@@ -30,9 +30,9 @@ Properties.init(
       type: Sequelize.BOOLEAN,
       defaultValue: true,
     },
-    statusType:{
-      type:Sequelize.STRING,
-      allowNull:false
+    statusType: {
+      type: Sequelize.STRING,
+      allowNull: false,
     },
     price: {
       type: Sequelize.DECIMAL(10, 2),
@@ -54,6 +54,11 @@ Properties.init(
       type: Sequelize.STRING,
       allowNull: false,
     },
+    availableDates:{
+      type:Sequelize.JSON,
+      defaultValue:{},
+      allowNull:false
+    }
   },
   { sequelize: db, modelName: "properties", timestamps: false }
 );

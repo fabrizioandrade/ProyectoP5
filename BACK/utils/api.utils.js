@@ -19,6 +19,7 @@ const propertiesForSale = async () => {
         neighborhood: faker.location.state(),
         city: faker.location.city(),
         country: faker.location.country(),
+        availableDates:{}
       };
       properties.push(property);
     }
@@ -40,5 +41,4 @@ console.log('error al crear datos falsos',error);
     }
 }
 
-//fillProperties()
 module.exports=fillProperties

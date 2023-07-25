@@ -7,7 +7,6 @@ const createAppointment=async(req,res)=>{
         const { userId } = req.params;
         const { propertyId, appointmentDate } = req.body;
     
-        
         const user = await Users.findByPk(userId);
         const property = await Properties.findByPk(propertyId);
     
@@ -15,14 +14,50 @@ const createAppointment=async(req,res)=>{
           return res.status(404).json({ error: 'Usuario o propiedad no encontrados.' });
         }
     
-        const appointment = await Appointments.create({
-          dateStatus:"confirmed",
-          date:appointmentDate,
-          userId: userId, 
-          propertyId: propertyId, 
+        const existingAppointment = await Appointments.findOne({
+          where: {
+            propertyId: propertyId,
+            date: appointmentDate,
+          },
         });
     
-        return res.status(201).json({ message: 'Cita creada exitosamente.', appointment });
+        if (existingAppointment) {
+          return res.status(400).json({ error: 'Ya hay una cita programada para esta propiedad en esta fecha.' });
+        }
+    
+        const availabilityDates = property.availableDates || {};
+    
+        if (availabilityDates[appointmentDate] === false) {
+          return res.status(400).json({ error: 'La fecha no está disponible.' });
+        }
+    
+        const appointment = await Appointments.create({
+          dateStatus: "confirmed",
+          date: appointmentDate,
+          userId: userId,
+          propertyId: propertyId,
+        });
+    
+        availabilityDates[appointmentDate] = false;
+        await property.update({ availableDates: availabilityDates });
+    
+        // Obtener todas las citas existentes para la propiedad
+        const allAppointments = await Appointments.findAll({
+          where: {
+            propertyId: propertyId,
+          },
+        });
+    
+        // Calcular las fechas disponibles basadas en las fechas ocupadas por las citas
+        const availableDates = {};
+        allAppointments.forEach((appointment) => {
+          availableDates[appointment.date] = false;
+        });
+    
+        // Agregar las fechas disponibles al objeto property
+        property.availableDates = availableDates;
+    
+        return res.status(201).json({ message: 'Cita creada exitosamente.', appointment, property });
       } catch (error) {
         console.error('Error al crear la cita:', error);
         return res.status(500).json({ error: 'Hubo un error al crear la cita.' });
@@ -108,4 +143,25 @@ const updateAppointment=async(req,res)=>{
       }
 }
 
-module.exports={createAppointment,getAppointment,deleteAppointment,updateAppointment}
+const deleteAll = async (req, res) => {
+    try {
+      const { userId } = req.params;
+  
+      const user = await Users.findByPk(userId);
+  
+      if (!user) {
+        return res.status(404).json({ error: 'Usuario no encontrado.' });
+      }
+  
+      await Appointments.destroy({
+        where: { userId: userId },
+      });
+  
+      return res.json({ message: 'Todas las citas del usuario han sido eliminadas exitosamente.' });
+    } catch (error) {
+      console.error('Error al eliminar todas las citas del usuario:', error);
+      return res.status(500).json({ error: 'Hubo un error al eliminar todas las citas del usuario.' });
+    }
+  };
+
+module.exports={createAppointment,getAppointment,deleteAppointment,updateAppointment,deleteAll}
