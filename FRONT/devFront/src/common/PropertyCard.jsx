@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from "react";
 import "../styles/card.css";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import axios from "axios";
+import { useSelector } from "react-redux";
 
 const PropertyCard = () => {
   const { id } = useParams();
   const [property, setProperty] = useState({});
-
+  const user = useSelector((state) => state.user);
+  const [selectedDate, setSelectedDate] = useState("");
+const navigate=useNavigate()
   useEffect(() => {
     axios
       .get(`http://localhost:3000/api/properties/${id}`)
@@ -15,6 +18,47 @@ const PropertyCard = () => {
       })
       .catch((error) => console.error(error));
   }, [id]);
+
+
+  const getCurrentDate = () => {
+    const currentDate = new Date();
+    const newDate = currentDate.toISOString().split("T")[0];
+    return newDate;
+  };
+  
+  const getMaxDate = () => {
+    const maxDate = new Date();
+    maxDate.setMonth(maxDate.getMonth() + 6);
+    /**devuelve fecha en formato YYYYYY-MM-DD */
+    const newDate = maxDate.toISOString().split("T")[0];
+    return newDate;
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    
+    const requestData = {
+      propertyId: id,
+      appointmentDate: selectedDate,
+    };
+    
+  
+
+    axios
+      .post(`http://localhost:3000/api/appointments/${user.id}`, requestData,    {
+        headers: { "Content-Type": "application/json" },
+        withCredentials: true,
+        credentials: "include",
+      })
+      .then((response) => {
+        
+        alert(response.data.message);
+        navigate('/home')
+      })
+      .catch((error) => {
+        alert(error.response.data.error);
+      });
+  };
 
   return (
     <div className="property-view ">
@@ -47,9 +91,23 @@ const PropertyCard = () => {
               </ul>
             </div>
             <div className="property-contact">
-              <button className="property-contact-button inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Contactar al vendedor <svg class="w-3.5 h-3.5 ml-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
-            </svg></button>
+            <form onSubmit={handleSubmit}>
+                <input
+                  type="date"
+                  required
+                  value={selectedDate}
+          onChange={(e) => setSelectedDate(e.target.value)}
+          min={getCurrentDate()}
+          max={getMaxDate()}
+          
+                />
+                <button
+                  type="submit"
+                  className="property-contact-button inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                >
+                  Solicitar cita
+                </button>
+              </form>
             </div>
           </div>
         </>
