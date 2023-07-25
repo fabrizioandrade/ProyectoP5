@@ -1,16 +1,21 @@
-import {  useSelector } from 'react-redux';
 import './App.css'
 import AuthWrapper from './common/AuthWrapper'
-import { Route, Routes } from "react-router";
-import Home from './components/Home';
+import { Route, Routes, useLocation } from "react-router";
+import Navbar from './components/Navbar';
+import PropertiesGrid from './components/PropertiesGrid';
+import PropertyCard from './common/PropertyCard';
+import CustomerView from './view/CustomerView';
 
 function App() {
-  const user = useSelector((state) => state.user);
+  const location = useLocation();
+  const showNavbar = location.pathname !== '/';
   return (
-    <div>
-
+    <div className='w-screen'>
+ {showNavbar && <Navbar />}
       <Routes>
-        <Route path="/home/*" element={<Home />} />
+      <Route path={'/home'} element={<PropertiesGrid/>}/>
+      <Route path={'/home/property/:id'} element={<PropertyCard/>}/>
+      <Route path={'/home/me/profile'} element={<CustomerView/>}/>
         <Route path="/" element={<AuthWrapper />} /> 
       
 
