@@ -40,4 +40,5 @@ console.log('error al crear datos falsos',error);
     }
 }
 
+//fillProperties()
 module.exports=fillProperties

@@ -2,6 +2,8 @@ const Users = require("../models/Users.models");
 const { generateToken } = require("../config/tokens");
 const { ADMIN_TOKEN } = require("../config/envs");
 
+
+//crear clase**
 const UserService = {
   createUser: async (userData) => {
     try {

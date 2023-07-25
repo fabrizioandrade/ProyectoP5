@@ -57,11 +57,9 @@ const deleteProperty=async(req,res)=>{
   const propertyId = req.params.id;
 
   try {
-    // Eliminar las relaciones asociadas
     await Appointments.destroy({ where: { propertyId: propertyId } });
     
 
-    // Eliminar la propiedad
     await Properties.destroy({ where: { id: propertyId } });
 
     res.status(200).json({ message: "Propiedad eliminada correctamente." ,propertyId:propertyId});

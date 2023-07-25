@@ -1,5 +1,5 @@
 import React from 'react'
-import Navbar from '../common/Navbar'
+import Navbar from './Navbar'
 import { Route, Routes } from 'react-router'
 import PropertiesGrid from './PropertiesGrid'
 import PropertyCard from '../common/PropertyCard'

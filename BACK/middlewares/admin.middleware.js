@@ -28,7 +28,7 @@ const validateAdmin = (req, res, next) => {
     }
 
     // Si el usuario no tiene el rol de "admin", enviar una respuesta de error
-    res.status(403).send("Acceso denegado. Se requiere permiso de administrador.");
+    res.status(401).send("Acceso denegado. Se requiere permiso de administrador.");
   } catch (error) {
     // Si hay un error al decodificar el token, enviar una respuesta de error
     res.status(401).send("Acceso no autorizado. Token inválido.");

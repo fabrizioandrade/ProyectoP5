@@ -54,7 +54,7 @@ const PropertyCard = () => {
           </div>
         </>
       ) : (
-        <p>Loading...</p>
+        <p>Propiedad fue eliminada</p>
       )}
     </div>
   );

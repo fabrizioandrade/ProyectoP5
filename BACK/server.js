@@ -67,18 +67,7 @@ app.use(
 
 app.use("/api", router);
 
-/**
- * Ruta de inicio para verificar si el servidor está funcionando correctamente.
- *
- * @function
- * @memberof module:app
- * @name GET /
- * @param {Object} req - Objeto de solicitud HTTP.
- * @param {Object} res - Objeto de respuesta HTTP.
- */
-app.get("/", (req, res) => {
-  res.send("<h1>dev house</h1>");
-});
+
 
 /**
  * Sincronizar la base de datos y escuchar en el puerto especificado.
