@@ -3,6 +3,7 @@ import "../styles/card.css";
 import { useNavigate, useParams } from "react-router";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import { getCurrentDate, getMaxDate } from "../utils/formatDate.utils";
 
 const PropertyCard = () => {
   const { id } = useParams();
@@ -20,44 +21,45 @@ const navigate=useNavigate()
   }, [id]);
 
 
-  const getCurrentDate = () => {
-    const currentDate = new Date();
-    const newDate = currentDate.toISOString().split("T")[0];
-    return newDate;
-  };
-  
-  const getMaxDate = () => {
-    const maxDate = new Date();
-    maxDate.setMonth(maxDate.getMonth() + 6);
-    /**devuelve fecha en formato YYYYYY-MM-DD */
-    const newDate = maxDate.toISOString().split("T")[0];
-    return newDate;
-  };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    
     const requestData = {
       propertyId: id,
       appointmentDate: selectedDate,
     };
     
+ 
+    if (!user || !user.id) {
+      const wantToLogin = window.confirm("¿Deseas iniciar sesión para continuar?");
+      if (wantToLogin) {
+        navigate("/");
+        return;
+      }
+      return;
+    }
+ try {
   
+  const response=await axios
+  .post(`http://localhost:3000/api/appointments/create/${user.id}`, requestData,    {
+    headers: { "Content-Type": "application/json" },
+    withCredentials: true,
+    credentials: "include",
+  })
 
-    axios
-      .post(`http://localhost:3000/api/appointments/${user.id}`, requestData,    {
-        headers: { "Content-Type": "application/json" },
-        withCredentials: true,
-        credentials: "include",
-      })
-      .then((response) => {
-        
-        alert(response.data.message);
-        navigate('/home')
-      })
-      .catch((error) => {
-        alert(error.response.data.error);
-      });
+
+
+  if(response.status==201){
+  alert(response.data.message);
+navigate('/home')
+}
+
+  
+ } catch (error) {
+alert(error.response.data.error)
+}
+
+
   };
 
   return (

@@ -42,7 +42,7 @@ export const Login = ({toggleAuthComponent}) => {
           .then((tokenVerifyResponse) => {
             dispatch(setUser(tokenVerifyResponse.data));
             alert(
-              `Inicio de sesión exitoso: Bienvenido de regreso ${tokenVerifyResponse.data.name} `
+              `Inicio de sesión exitoso:Bienvenido ${tokenVerifyResponse.data.name} `
             );
 
             // Mover la navegación a la página principal aquí
