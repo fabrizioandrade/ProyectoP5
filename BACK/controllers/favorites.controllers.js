@@ -5,7 +5,7 @@ const Users = require("../models/Users.models");
 const addFavorite = async (req, res) => {
   try {
     const userId = req.params.userId;
-    const propertyId = req.body.id;
+    const propertyId = req.body.propertyId;
     console.log(req.body);
     // verifica si el usuario existe
     const user = await Users.findByPk(userId);
@@ -70,8 +70,7 @@ const getFavoritesByUserId = async (req, res) => {
       include: [Properties],
     });
 
-    const validFavorites = favorites.filter((fav) => fav.properties.length > 0);
-
+    const validFavorites = favorites.flatMap((fav) => fav.properties);
     return res.status(200).json({ validFavorites });
   } catch (error) {
     console.error("Error al obtener propiedades favoritas:", error);
@@ -83,6 +82,8 @@ const removeFavorite = async (req, res) => {
   try {
     const userId = req.params.userId;
     const propertyId = req.body.id;
+
+    console.log('log del back',propertyId);
 
     // verifica si el usuario existe
     const user = await Users.findByPk(userId);

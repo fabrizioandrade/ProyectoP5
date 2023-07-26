@@ -1,0 +1,12 @@
+button:hover .heart-filled {
+    fill: transparent;
+  }
+  
+  button:hover .heart-outline {
+    visibility: visible;
+  }
+  
+  .heart-outline {
+    visibility: hidden;
+  }
+  

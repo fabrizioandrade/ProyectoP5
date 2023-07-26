@@ -5,6 +5,7 @@ import Navbar from './components/Navbar';
 import PropertiesGrid from './components/PropertiesGrid';
 import PropertyCard from './common/PropertyCard';
 import CustomerView from './view/CustomerView';
+import Favorites from './components/Favorites';
 
 function App() {
   const location = useLocation();
@@ -18,6 +19,7 @@ function App() {
       <Route path={'/home/me/profile'} element={<CustomerView/>}/>
         <Route path="/" element={<AuthWrapper />} /> 
       
+        <Route path="/home/favorites" element={<Favorites />} /> 
 
       </Routes>
     </div>

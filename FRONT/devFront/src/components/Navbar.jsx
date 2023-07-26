@@ -71,7 +71,8 @@ const Navbar = () => {
           <button onClick={()=>setTypeProperty('for_rent')}  className="text-white hover:text-gray-200">En alquiler</button>
           {user.name ? (
             <>
-              <button className="text-white hover:text-gray-200">Favoritos</button>
+            <Link to={'/home/favorites'}>
+              <button className="text-white hover:text-gray-200">Favoritos</button></Link>
               <div className="relative inline-block text-left">
                 <button
                   onClick={()=>setIsDropdownOpen(!isDropdownOpen)}
@@ -89,7 +90,7 @@ const Navbar = () => {
                   aria-orientation="vertical"
                   aria-labelledby="user-menu"
                 >
-                  <Link to="home/me/profile" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">
+                  <Link  onClick={() => setIsDropdownOpen(false)} to="home/me/profile" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">
                     Ver perfil
                   </Link>
                   <button

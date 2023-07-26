@@ -19,7 +19,7 @@ const PropertiesGrid = () => {
           <p className="text-lg font-semibold text-blue-700 cursor-auto my-3">USD{property.price}</p>
           <div className="flex justify-between ml-5">
                     <p className="text-sm text-blue-500">
-                    {(Math.floor(Math.random()*2))+` amb ${property.descriptionData.beds} dorm. ${property.descriptionData.baths} baño ${property.descriptionData.garage==='true'?`1 coch.`:`0 coch.`}` }</p>
+                    {` ${property.descriptionData.beds} dorm. ${property.descriptionData.baths} baño ${property.descriptionData.garage==='true'?`1 coch.`:`0 coch.`}` }</p>
                   </div>
        
         </div>
