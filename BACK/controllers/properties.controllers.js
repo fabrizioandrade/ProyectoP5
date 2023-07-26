@@ -1,3 +1,4 @@
+const { Sequelize } = require("sequelize");
 const Appointments = require("../models/Appointments.models.");
 const Properties = require("../models/Properties.models.");
 
@@ -107,4 +108,25 @@ const updateProperty=async(req,res)=>{
     });
   }
 }
-module.exports={getAllProperties,getSingleProperty,getPropertyType,createProperty,deleteProperty,updateProperty}
+
+
+const searchPropertiesByName=async(req,res)=>{
+  const { name } = req.params;
+
+  try {
+    const properties = await Properties.findAll({
+      where: Sequelize.where(
+        Sequelize.fn("LOWER", Sequelize.col("name")),
+        "LIKE",
+        `%${name.toLowerCase()}%`
+      )
+    });
+    res.json(properties);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      message: "No se encontraron propiedades",
+    });
+  }
+}
+module.exports={getAllProperties,getSingleProperty,getPropertyType,createProperty,deleteProperty,updateProperty,searchPropertiesByName}
