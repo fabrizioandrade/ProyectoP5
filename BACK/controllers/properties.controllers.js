@@ -109,6 +109,11 @@ const updateProperty=async(req,res)=>{
   }
 }
 
+/**
+ * Sequelize.where toma tres argumentos, la columna en la que se desea aplicar la condición, el operador de comparación y el valor con el que se comparará la columna.
+ * 
+ * Sequelize.fn:
+Es un método de Sequelize que se utiliza para construir una función en la consulta SQL. Sequelize.fn toma dos argumentos: el nombre de la función SQL que se desea utilizar y el valor/columna que se utilizará como argumento para la función.Los parametros se utilizan  para aplicar la función LOWER a la columna "name", convirtiendo el valor a minúsculas antes de compararlo en la cláusula WHERE */
 
 const searchPropertiesByName=async(req,res)=>{
   const { name } = req.params;

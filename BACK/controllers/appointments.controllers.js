@@ -44,20 +44,17 @@ const createAppointment = async (req, res) => {
     availabilityDates[appointmentDate] = false;
     await property.update({ availableDates: availabilityDates });
 
-    // Obtener todas las citas existentes para la propiedad
     const allAppointments = await Appointments.findAll({
       where: {
         propertyId: propertyId,
       },
     });
 
-    // Calcular las fechas disponibles basadas en las fechas ocupadas por las citas
     const availableDates = {};
     allAppointments.forEach((appointment) => {
       availableDates[appointment.date] = false;
     });
 
-    // Agregar las fechas disponibles al objeto property
     property.availableDates = availableDates;
 
     return res

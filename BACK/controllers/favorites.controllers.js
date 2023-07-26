@@ -6,14 +6,11 @@ const addFavorite = async (req, res) => {
   try {
     const userId = req.params.userId;
     const propertyId = req.body.propertyId;
-    console.log(req.body);
-    // verifica si el usuario existe
     const user = await Users.findByPk(userId);
     if (!user) {
       return res.status(404).json({ error: "Usuario no encontrado" });
     }
 
-    // verifica si la propiedad existe
     const property = await Properties.findByPk(propertyId);
     if (!property) {
       return res.status(404).json({ error: "Propiedad no encontrada" });
@@ -40,7 +37,6 @@ const addFavorite = async (req, res) => {
         .json({ error: "Esta propiedad ya está en la lista de favoritos del usuario" });
     }
 
-    // agrega la propiedad a la lista de favoritos del usuario
     const favorite = await Favorites.create({ userId });
     await favorite.addProperty(property); /**Este método es automáticamente generado debido a la asociación belongsToMany */
     return res
@@ -58,13 +54,11 @@ const getFavoritesByUserId = async (req, res) => {
   try {
     const userId = req.params.userId;
 
-    // verificar si el usuario existe
     const user = await Users.findByPk(userId);
     if (!user) {
       return res.status(404).json({ error: "Usuario no encontrado" });
     }
 
-    //obtiene todas las propiedades favoritas del usuario
     const favorites = await Favorites.findAll({
       where: { userId },
       include: [Properties],
@@ -85,19 +79,16 @@ const removeFavorite = async (req, res) => {
 
     console.log('log del back',propertyId);
 
-    // verifica si el usuario existe
     const user = await Users.findByPk(userId);
     if (!user) {
       return res.status(404).json({ error: "Usuario no encontrado" });
     }
 
-    // verifica si la propiedad existe
     const property = await Properties.findByPk(propertyId);
     if (!property) {
       return res.status(404).json({ error: "Propiedad no encontrada" });
     }
 
-    // obtiene todas las propiedades favoritas del usuario
     const favorites = await Favorites.findAll({
       where: { userId },
       include: [Properties],
@@ -113,7 +104,6 @@ const removeFavorite = async (req, res) => {
       });
     }
 
-    // elimina la propiedad de la lista de favoritos del usuario
     await favorite.removeProperty(property);
 
     return res
@@ -129,7 +119,6 @@ const removeFavorite = async (req, res) => {
 
 const getAllFavorites = async (req, res) => {
   try {
-    // Obtiene todos los favoritos
     const allFavorites = await Favorites.findAll({
       include: [Properties, Users],
     });
