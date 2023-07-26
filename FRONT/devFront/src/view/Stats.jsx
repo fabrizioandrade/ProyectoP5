@@ -45,7 +45,7 @@ setnumOfAppointments(appointments.data.length)
         fetchData()
     },[])
   return (
-<div className="bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+<div className=" pt-28 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
     <ul className=" text-sm font-medium text-center text-gray-500 divide-x divide-gray-200 rounded-lg sm:flex dark:divide-gray-600 dark:text-gray-400"  role="tablist">
         
         <li className="w-full">
@@ -57,7 +57,7 @@ setnumOfAppointments(appointments.data.length)
             <dl className="grid grid-cols-2 gap-8 p-4 mx-auto text-gray-900 sm:grid-cols-3 xl:grid-cols-6 dark:text-white sm:p-8">
                 <div className="flex flex-col items-center justify-center">
                     <dt className="mb-2 text-3xl font-extrabold">{numOfUsers}</dt>
-                    <dd className="text-gray-500 dark:text-gray-400">{numOfUsers!=1?(`Usuarios logueados`):('Usuario logueado')}</dd>
+                    <dd className="text-gray-500 dark:text-gray-400">{numOfUsers!=1?(`Usuarios registrados`):('Usuario registrado')}</dd>
                 </div>
                 <div className="flex flex-col items-center justify-center">
                     <dt className="mb-2 text-3xl font-extrabold">{numOfProperties}</dt>

@@ -10,6 +10,7 @@ import AdminNavbar from './components/AdminNavbar';
 import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import Stats from './view/Stats';
+import Search from './common/Search';
 
 function App() {
   const location = useLocation();
@@ -26,17 +27,17 @@ function App() {
   }, [user]);
   const showNavbar = location.pathname !== '/' 
   return (
-    <div className='w-screen'>
+    <div className=''>
  {showNavbar && (isUserVerified? <AdminNavbar />:<Navbar/>)}
       <Routes>
-      <Route path={'/home'} element={user.role?<Stats/>:<PropertiesGrid/>}/>
+      <Route path={'/home'} element={user.role==='admin'?<Stats/>:<PropertiesGrid/>}/>
       <Route path={'/home/property/:id'} element={<PropertyCard/>}/>
       <Route path={'/home/me/profile'} element={user.email? <CustomerView/>:<AuthWrapper/>}/>
      
         <Route path="/" element={<AuthWrapper />} /> 
       
         <Route path="/home/favorites" element={user.email?<Favorites />:<AuthWrapper/>} /> 
-
+<Route path='/home/search' element={<Search/>}/>
       </Routes>
     </div>
   );
