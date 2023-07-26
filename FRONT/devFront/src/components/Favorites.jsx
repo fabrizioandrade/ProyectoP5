@@ -28,7 +28,7 @@ const Favorites = () => {
       await axios
       .delete(
         `http://localhost:3000/api/favorites/remove/${user.id}`, {
-          data: { id: propertyId }, // Send the 'id' in the request body
+          data: { id: propertyId }, 
           headers: { "Content-Type": "application/json" },
           withCredentials: true,
           credentials: "include",
@@ -46,11 +46,6 @@ const Favorites = () => {
       console.error("no se elimino de favoritos", error);
       
     }
-    
-        // setfavProperties((prevFavProperties) => {
-        //   const updatedFavProperties = prevFavProperties.validFavorites.filter((property) => property.id !== propertyId);
-        //   return { ...prevFavProperties, validFavorites: updatedFavProperties };
-    
   };
 
   return (
