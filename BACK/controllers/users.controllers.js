@@ -53,7 +53,8 @@ const logOut = (req, res) => {
 const getAllUsers=async(req,res)=>{
   try {
     const users = await UserService.getAllUsers();
-    res.send(users);
+    const customers = users.filter(user => user.role === 'customer');
+    res.send(customers);
   } catch (error) {
     res.status(400).send("error al obtener usuarios");
   }

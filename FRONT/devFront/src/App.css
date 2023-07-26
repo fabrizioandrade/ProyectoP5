@@ -1,11 +1,6 @@
 
 
-/* body {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-  
-  } */
+
   .bg-cover {
     background-size: cover;
   }
@@ -28,8 +23,3 @@
   }
 
 
-  /* @media screen and (max-width: 1280px) {
-    #root {
-      padding: 2rem;
-    }
-  } */

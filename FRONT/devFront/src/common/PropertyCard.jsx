@@ -10,7 +10,7 @@ const PropertyCard = () => {
   const [property, setProperty] = useState({});
   const user = useSelector((state) => state.user);
   const [selectedDate, setSelectedDate] = useState("");
-const navigate=useNavigate()
+  const navigate = useNavigate();
   useEffect(() => {
     axios
       .get(`http://localhost:3000/api/properties/${id}`)
@@ -20,46 +20,41 @@ const navigate=useNavigate()
       .catch((error) => console.error(error));
   }, [id]);
 
-
-
   const handleSubmit = async (event) => {
     event.preventDefault();
     const requestData = {
       propertyId: id,
       appointmentDate: selectedDate,
     };
-    
- 
+
     if (!user || !user.id) {
-      const wantToLogin = window.confirm("¿Deseas iniciar sesión para continuar?");
+      const wantToLogin = window.confirm(
+        "¿Deseas iniciar sesión para continuar?"
+      );
       if (wantToLogin) {
         navigate("/");
         return;
       }
       return;
     }
- try {
-  
-  const response=await axios
-  .post(`http://localhost:3000/api/appointments/create/${user.id}`, requestData,    {
-    headers: { "Content-Type": "application/json" },
-    withCredentials: true,
-    credentials: "include",
-  })
+    try {
+      const response = await axios.post(
+        `http://localhost:3000/api/appointments/create/${user.id}`,
+        requestData,
+        {
+          headers: { "Content-Type": "application/json" },
+          withCredentials: true,
+          credentials: "include",
+        }
+      );
 
-
-
-  if(response.status==201){
-  alert(response.data.message);
-navigate('/home')
-}
-
-  
- } catch (error) {
-alert(error.response.data.error)
-}
-
-
+      if (response.status == 201) {
+        alert(response.data.message);
+        navigate("/home");
+      }
+    } catch (error) {
+      alert(error.response.data.error);
+    }
   };
 
   return (
@@ -75,33 +70,45 @@ alert(error.response.data.error)
           </div>
           <div className="property-details-container">
             <div className="property-details">
-              <h1 className="property-title">{property.category.charAt(0).toUpperCase() + property.category.slice(1)} {property.statusType === "for_sale" ? "en venta" : "en renta"} en {property.city}</h1>
+              <h1 className="property-title">
+                {property.category.charAt(0).toUpperCase() +
+                  property.category.slice(1)}{" "}
+                {property.statusType === "for_sale" ? "en venta" : "en renta"}{" "}
+                en {property.city}
+              </h1>
               <h2 className="property-price">USD {property.price}</h2>
-              <p className="property-description mb-3 font-normal text-gray-700 dark:text-gray-400">{property.description}</p>
+              <p className="property-description mb-3 font-normal text-gray-700 dark:text-gray-400">
+                {property.description}
+              </p>
               <ul className="property-features">
                 {property.descriptionData ? (
                   <>
                     <li>{`${property.descriptionData.beds} ${
-                      property.descriptionData.beds === 1 ? "dormitorio" : "dormitorios"
+                      property.descriptionData.beds === 1
+                        ? "dormitorio"
+                        : "dormitorios"
                     }`}</li>
                     <li>{`${property.descriptionData.baths} ${
                       property.descriptionData.baths === 1 ? "baño" : "baños"
                     }`}</li>
-                    <li>{property.descriptionData.garage ? "Garaje" : "Sin garaje"}</li>
+                    <li>
+                      {property.descriptionData.garage
+                        ? "Garaje"
+                        : "Sin garaje"}
+                    </li>
                   </>
                 ) : null}
               </ul>
             </div>
             <div className="property-contact">
-            <form onSubmit={handleSubmit}>
+              <form onSubmit={handleSubmit}>
                 <input
                   type="date"
                   required
                   value={selectedDate}
-          onChange={(e) => setSelectedDate(e.target.value)}
-          min={getCurrentDate()}
-          max={getMaxDate()}
-          
+                  onChange={(e) => setSelectedDate(e.target.value)}
+                  min={getCurrentDate()}
+                  max={getMaxDate()}
                 />
                 <button
                   type="submit"

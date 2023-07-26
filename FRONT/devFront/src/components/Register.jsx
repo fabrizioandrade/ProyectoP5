@@ -1,5 +1,5 @@
 import React ,{useState} from 'react';
-import logo from '../assets/logo.png'
+import logo from '../../public/assets/logo.png'
 import axios from 'axios';
 const Register = ({toggleAuthComponent}) => {
 const [name, setName] = useState("");

@@ -127,6 +127,18 @@ const removeFavorite = async (req, res) => {
   }
 };
 
+const getAllFavorites = async (req, res) => {
+  try {
+    // Obtiene todos los favoritos
+    const allFavorites = await Favorites.findAll({
+      include: [Properties, Users],
+    });
 
+    return res.status(200).send(allFavorites );
+  } catch (error) {
+    console.error("Error al obtener todos los favoritos:", error);
+    return res.status(500).json({ error: "Error al obtener todos los favoritos" });
+  }
+};
 
-module.exports = { addFavorite,getFavoritesByUserId,removeFavorite};
+module.exports = { addFavorite,getFavoritesByUserId,removeFavorite,getAllFavorites};

@@ -65,12 +65,13 @@ const Navbar = () => {
       <div className="container mx-auto flex justify-between items-center">
         <Link to={'/home'}><div className="text-black transparent-text font-bold">HOD.</div></Link>
         <div className="space-x-4">
-        <button onClick={()=>setTypeProperty(null)} className="text-white hover:text-gray-200">Descubre</button>
+        <button onClick={()=>setTypeProperty(null)} className="text-white focus:ring">Descubre</button>
           <button onClick={()=>setTypeProperty('for_sale')}     className="text-white   focus:ring ">En venta</button>
           
-          <button onClick={()=>setTypeProperty('for_rent')}  className="text-white hover:text-gray-200">En alquiler</button>
+          <button onClick={()=>setTypeProperty('for_rent')}  className="text-white focus:ring">En alquiler</button>
           {user.name ? (
             <>
+
             <Link to={'/home/favorites'}>
               <button className="text-white hover:text-gray-200">Favoritos</button></Link>
               <div className="relative inline-block text-left">

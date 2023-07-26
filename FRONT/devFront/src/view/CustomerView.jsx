@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import Icon from '../common/Icon';
-import computer from '../assets/computer.png'
+import computer from '../../public/assets/computer.png'
 const CustomerView = () => {
   const user = useSelector((state) => state.user);
 console.log(user);

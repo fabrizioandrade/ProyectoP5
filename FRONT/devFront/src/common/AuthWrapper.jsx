@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import foto from '../assets/ravi-avaala-2d4lAQAlbDA-unsplash.jpg'
+import foto from '../../public/assets/ravi-avaala-2d4lAQAlbDA-unsplash.jpg'
 import Register from '../components/Register'
 import { Login } from '../components/Login'
 const AuthWrapper = () => {
