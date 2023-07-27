@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { setProperties } from "../state/properties";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
-
+import { setAdminData } from "../state/adminData";
+import { setSelectedOption } from "../state/selectedOption";
 const Search = () => {
     const [dropdownVisible, setDropdownVisible] = useState(false);
     const [filteredSearch, setFilteredSearch] = useState(null);
-    const [selectedOption, setSelectedOption] = useState("Propiedades");
+    const selectedOption = useSelector((state) => state.option);
     const dispatch = useDispatch();
+    // const data=useSelector((state)=>state.adminData)
 
   
     function toggleDropdown() {
@@ -15,35 +16,48 @@ const Search = () => {
     }
   
     function handleMenuItemClick() {
-      setSelectedOption((prevOption) =>
-        prevOption === "Usuarios" ? "Propiedades" : "Usuarios"
-      );
+      const newSelectedOption =
+      selectedOption === "Usuarios" ? "Propiedades" : "Usuarios";
+    dispatch(setSelectedOption(newSelectedOption));
       toggleDropdown();
+      
     }
 
 
 
 const fetchSearch=async()=>{
     try {
-      console.log('llegue aca');
-      console.log(selectedOption);
-        if(selectedOption==='Propiedades'){
-          console.log('estoy en el if');
-            let url="http://localhost:3000/api/properties"
-            if (filteredSearch){
-              url=`http://localhost:3000/api/properties/search/${filteredSearch}`
-            }
-            const response = await axios.get(url);
-            console.log('response',response);
-            const sortedProperties= response.data.sort((a, b) => a.id - b.id);
-            dispatch(setProperties(sortedProperties));
-        }
-        else if(selectedOption==='Usuarios'){
-
-        }
+      const option=selectedOption==='Propiedades'?`properties`:`users`
+      const adminRequest=option===`users`? true: false
+      console.log('option',option);
+      const dataType=option==='properties'?'property':'user'
+      console.log('datatype',dataType);
+      let url=option===`properties`?`http://localhost:3000/api/${option}`:`http://localhost:3000/api/${option}/admin`
+      if(filteredSearch){
+        url=`http://localhost:3000/api/${option}/search/${filteredSearch}`
+      }
+if(adminRequest){
+  const response=await axios.get(url,{
+    headers: { 'Content-Type': 'application/json' },
+    withCredentials: true,
+    credentials: 'include',
+  })
+  console.log('response del admin',response);
+  const sortedData=response.data.sort((a,b)=>a.id-b.id)
+      const data=sortedData.map(object=>({...object,type:dataType}))
+      dispatch(setAdminData(data))
+}
+else{
+  const response=await axios.get(url)
+  console.log('response de properties',response);
+  const sortedData=response.data.sort((a,b)=>a.id-b.id)
+      const data=sortedData.map(object=>({...object,type:dataType}))
+      dispatch(setAdminData(data))
+}
+      
         
     } catch (error) {
-        
+        console.log('ocurrio un error',error);
     }
 }
   const handleSearch = (e) => {
@@ -52,7 +66,9 @@ const fetchSearch=async()=>{
 
   useEffect(() => {
     fetchSearch();
-  }, [filteredSearch]);
+  }, [filteredSearch,selectedOption]);
+
+
 
     return (
       <div className="relative  md:h-96 w-full">

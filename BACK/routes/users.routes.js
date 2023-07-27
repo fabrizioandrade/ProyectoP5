@@ -4,7 +4,7 @@ const {
   loginUser,
   logOut,
   getAllUsers,
-  getOneUser,
+  getOneUser,searchUser
 } = require("../controllers/users.controllers");
 const validateUser = require("../middlewares/auth.middleware");
 const Joi = require("joi");
@@ -40,7 +40,8 @@ userRouter.post("/logout", logOut);
 userRouter.get("/me", validateUser, (req, res) => {
   res.status(200).send({ status: "OK", ...req.user });
 });
-userRouter.get("/admin/", validateAdmin, getAllUsers);
+userRouter.get("/admin", validateAdmin, getAllUsers);
 userRouter.get("/admin/info/:id", validateAdmin, getOneUser);
+userRouter.get("/search/:query", validateAdmin, searchUser);
 
 module.exports = userRouter;

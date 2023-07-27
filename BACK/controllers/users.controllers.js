@@ -1,3 +1,5 @@
+const { Sequelize } = require("sequelize");
+const Users = require("../models/Users.models");
 const UserService = require("../services/user.services");
 
 const createUser = async (req, res) => {
@@ -69,4 +71,41 @@ const getOneUser=async(req,res)=>{
     res.status(400).send("error al obtener el usuario");
   }
 }
-module.exports = { createUser, loginUser, logOut ,getAllUsers,getOneUser};
+
+const searchUser=async(req,res)=>{
+  const { query } = req.params; 
+  const isNumeric = !isNaN(query);
+  try {
+    let users;
+
+    if (isNumeric) {
+      const id = parseInt(query);
+      const user = await Users.findByPk(id, {
+        attributes: ["id", "name", "email", "phone", "role"],
+      });
+
+      if (user) {
+        users = [user];
+      } else {
+        users = [];
+      }
+    } else {
+      users = await Users.findAll({
+        where: Sequelize.where(
+          Sequelize.fn("LOWER", Sequelize.col("name")),
+          "LIKE",
+          `%${query.toLowerCase()}%`
+        ),
+        attributes: ["id", "name", "email", "phone", "role"],
+      });
+    }
+
+    res.json(users);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      message: "No se encontraron usuarios",
+    });
+  }
+}
+module.exports = { createUser, loginUser, logOut ,getAllUsers,getOneUser,searchUser};

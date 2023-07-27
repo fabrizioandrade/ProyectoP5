@@ -11,6 +11,7 @@ import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import Stats from './view/Stats';
 import Search from './common/Search';
+import AdminGrid from './components/AdminGrid';
 
 function App() {
   const location = useLocation();
@@ -39,7 +40,7 @@ function App() {
         <Route path="/home/favorites" element={user.email?<Favorites />:<AuthWrapper/>} /> 
 <Route path='/home/search' element={<Search/>}/>
       </Routes>
-      {location.pathname === '/home/search' && <PropertiesGrid />}
+      {location.pathname === '/home/search' && <AdminGrid />}
     </div>
   );
 }
