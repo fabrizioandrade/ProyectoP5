@@ -39,6 +39,7 @@ function App() {
         <Route path="/home/favorites" element={user.email?<Favorites />:<AuthWrapper/>} /> 
 <Route path='/home/search' element={<Search/>}/>
       </Routes>
+      {location.pathname === '/home/search' && <PropertiesGrid />}
     </div>
   );
 }
