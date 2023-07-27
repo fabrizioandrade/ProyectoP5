@@ -10,6 +10,8 @@ Antes de ejecutar el servidor, asegúrate de instalar las dependencias necesaria
 npm install
 ```
 
+Esto creara automaticamente la base de datos y la misma rellenara con datos.
+
 ## Ejecucion del servidor
 
 Para ejecutar el servidor, utiliza el siguiente comando:

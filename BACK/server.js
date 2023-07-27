@@ -6,7 +6,6 @@ const cors = require("cors");
 const { DB_PORT } = require("./config/envs");
 const db = require("./models");
 const router = require("./routes");
-const fillProperties = require("./utils/api.utils");
 
 /**
  * Middleware para registrar las solicitudes y respuestas en la consola durante el desarrollo.
@@ -52,7 +51,6 @@ app.use(
 );
 
 
-// fillProperties()
 
 
 
