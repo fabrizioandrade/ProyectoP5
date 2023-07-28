@@ -11,12 +11,14 @@ import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import Stats from './view/Stats';
 import Search from './common/Search';
-import AdminGrid from './components/AdminGrid';
+import AddProperty from './components/AddProperty';
+
 
 function App() {
   const location = useLocation();
   const user = useSelector((state) => state.user); 
   const [isUserVerified, setIsUserVerified] = useState(false);
+  const showNavbar = location.pathname !== '/' 
 
   useEffect(() => {
     if (user.role === 'admin') {
@@ -26,7 +28,8 @@ function App() {
       setIsUserVerified(false)
     }
   }, [user]);
-  const showNavbar = location.pathname !== '/' 
+
+
   return (
     <div className=''>
  {showNavbar && (isUserVerified? <AdminNavbar />:<Navbar/>)}
@@ -38,9 +41,17 @@ function App() {
         <Route path="/" element={<AuthWrapper />} /> 
       
         <Route path="/home/favorites" element={user.email?<Favorites />:<AuthWrapper/>} /> 
+{user.role==='admin' && (
+<>
 <Route path='/home/search' element={<Search/>}/>
+<Route path='home/admin/addProperty' element={<AddProperty/>}/>
+
+</>
+) }
+
+
+
       </Routes>
-      {location.pathname === '/home/search' && <AdminGrid />}
     </div>
   );
 }

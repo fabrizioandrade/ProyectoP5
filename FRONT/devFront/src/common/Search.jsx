@@ -3,12 +3,12 @@ import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { setAdminData } from "../state/adminData";
 import { setSelectedOption } from "../state/selectedOption";
+import AdminGrid from "../components/AdminGrid";
 const Search = () => {
     const [dropdownVisible, setDropdownVisible] = useState(false);
     const [filteredSearch, setFilteredSearch] = useState(null);
     const selectedOption = useSelector((state) => state.option);
     const dispatch = useDispatch();
-    // const data=useSelector((state)=>state.adminData)
 
   
     function toggleDropdown() {
@@ -25,11 +25,10 @@ const Search = () => {
 
 
 
-const fetchSearch=async()=>{
+const fetchData=async()=>{
     try {
       const option=selectedOption==='Propiedades'?`properties`:`users`
       const adminRequest=option===`users`? true: false
-      console.log('option',option);
       const dataType=option==='properties'?'property':'user'
       console.log('datatype',dataType);
       let url=option===`properties`?`http://localhost:3000/api/${option}`:`http://localhost:3000/api/${option}/admin`
@@ -42,14 +41,12 @@ if(adminRequest){
     withCredentials: true,
     credentials: 'include',
   })
-  console.log('response del admin',response);
   const sortedData=response.data.sort((a,b)=>a.id-b.id)
       const data=sortedData.map(object=>({...object,type:dataType}))
       dispatch(setAdminData(data))
 }
 else{
   const response=await axios.get(url)
-  console.log('response de properties',response);
   const sortedData=response.data.sort((a,b)=>a.id-b.id)
       const data=sortedData.map(object=>({...object,type:dataType}))
       dispatch(setAdminData(data))
@@ -65,12 +62,13 @@ else{
   };
 
   useEffect(() => {
-    fetchSearch();
+    fetchData();
   }, [filteredSearch,selectedOption]);
 
 
 
     return (
+      <>
       <div className="relative  md:h-96 w-full">
         <div
           className="absolute top-0 right-0 bottom-0 left-0 z-0 bg-cover bg-center opacity-1"
@@ -139,6 +137,8 @@ else{
           </div>
         </form>
       </div>
+      <AdminGrid fetchData={fetchData}/>
+      </>
     );
 };
 
