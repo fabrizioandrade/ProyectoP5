@@ -61,7 +61,7 @@ const Navbar = () => {
 
 
   return (
-    <nav className="navbar bg-red-500 p-4 fixed top-0 left-0 w-full">
+    <nav className="navbar bg-red-500 p-4  top-0 left-0 w-full">
       <div className="container mx-auto flex justify-between items-center">
         <Link to={'/home'}><div className="text-black transparent-text font-bold">HOD.</div></Link>
         <div className="space-x-4">

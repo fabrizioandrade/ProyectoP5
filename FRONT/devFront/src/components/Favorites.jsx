@@ -1,10 +1,13 @@
 import React, { Fragment, useEffect, useState } from "react";
 import "../styles/favorites.css";
 import axios from "axios";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setFavorites } from "../state/favorites";
 const Favorites = () => {
   const user = useSelector((state) => state.user);
-  const [favProperties, setfavProperties] = useState([]);
+  const favorites=useSelector((state)=>state.favorites)
+  const dispatch = useDispatch();
+
  
 
   useEffect(() => {
@@ -16,7 +19,7 @@ const Favorites = () => {
           credentials: "include",
         })
         .then((response) => {
-          setfavProperties(response.data.validFavorites);
+          dispatch(setFavorites(response.data.validFavorites))
         })
         .catch((err) => console.log(err));
     }
@@ -41,7 +44,7 @@ const Favorites = () => {
         withCredentials: true,
         credentials: "include",
       })
-      setfavProperties(response.data.validFavorites)
+      dispatch(setFavorites(response.data.validFavorites))
     } catch (error) {
       console.error("no se elimino de favoritos", error);
       
@@ -52,7 +55,7 @@ const Favorites = () => {
     <div className="flex flex-col md:flex-row px-10 overflow-y-auto w-screen h-screen pt-20">
       <div className="w-full flex flex-col h-fit gap-4 p-4 ">
         <p className="text-dark-900 text-xl font-extrabold flex">Favoritos</p>
-        {favProperties?.map((property, index) => (
+        {favorites?.map((property, index) => (
           <Fragment key={index}>
             <div className="flex flex-col p-4 text-lg font-semibold shadow-md border rounded-sm">
               <div className="flex flex-col md:flex-row gap-3 justify-between">
