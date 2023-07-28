@@ -13,6 +13,7 @@ import Stats from './view/Stats';
 import Search from './common/Search';
 import AddProperty from './components/AddProperty';
 import Appointments from './components/Appointments';
+import AdminCustomerView from './view/AdminCustomerView';
 
 
 function App() {
@@ -44,6 +45,7 @@ function App() {
         <Route path="/home/favorites" element={user.email?<Favorites />:<AuthWrapper/>} /> 
 {user.role==='admin' && (
 <>
+<Route path='/home/user/:id' element={<AdminCustomerView/>}/>
 <Route path='/home/search' element={<Search/>}/>
 <Route path='home/admin/addProperty' element={<AddProperty/>}/>
 <Route path='home/admin/appointments' element={<Appointments/>}/>

@@ -100,7 +100,7 @@ const PropertyCard = () => {
                 ) : null}
               </ul>
             </div>
-            <div className="property-contact">
+            {user.role==='customer' && (  <div className="property-contact">
               <form onSubmit={handleSubmit}>
                 <input
                   type="date"
@@ -117,7 +117,8 @@ const PropertyCard = () => {
                   Solicitar cita
                 </button>
               </form>
-            </div>
+            </div>)}
+          
           </div>
         </>
       ) : (

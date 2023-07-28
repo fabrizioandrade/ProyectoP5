@@ -34,16 +34,16 @@ const Navbar = () => {
 
   useEffect(() => {
     axios
-      .get('http://localhost:3000/api/users/me', {
-        headers: { 'Content-Type': 'application/json' },
+      .get("http://localhost:3000/api/users/me", {
+        headers: { "Content-Type": "application/json" },
         withCredentials: true,
-        credentials: 'include',
+        credentials: "include",
       })
       .then((user) => {
         dispatch(setUser(user.data));
       })
       .catch((error) => {
-        console.error('Error de servidor',error);
+        console.error("Error de servidor", error);
       });
   }, []);
 

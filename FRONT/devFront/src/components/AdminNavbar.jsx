@@ -38,6 +38,8 @@ const AdminNavbar = () => {
       });
   }, []);
 
+
+
   const handleLogout = () => {
     axios
       .post("http://localhost:3000/api/users/logout", null, {
@@ -112,7 +114,7 @@ const AdminNavbar = () => {
                 </Link>
               </li>
               <li>
-                <button className="flex items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                <Link to={'/home/admin/addProperty'}><button className="flex items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
                   <svg
                     width="20px"
                     height="20px"
@@ -166,7 +168,7 @@ const AdminNavbar = () => {
                   <span className="ml-2" style={{ whiteSpace: "nowrap" }}>
                     Publicar
                   </span>
-                </button>
+                </button></Link>
               </li>
               <li>
                 <Link to={"/home/search"}>

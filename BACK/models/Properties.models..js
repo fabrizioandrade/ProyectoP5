@@ -54,11 +54,11 @@ Properties.init(
       type: Sequelize.STRING,
       allowNull: false,
     },
-    availableDates:{
-      type:Sequelize.JSON,
-      defaultValue:{},
-      allowNull:false
-    }
+    availableDates: {
+      type: Sequelize.JSON,
+      defaultValue: {},
+      allowNull: false,
+    },
   },
   { sequelize: db, modelName: "properties", timestamps: false }
 );
