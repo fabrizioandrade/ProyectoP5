@@ -16,11 +16,11 @@ try {
         withCredentials: true,
         credentials: 'include',
       })
-      const favorites=await axios.get('http://localhost:3000/api/favorites/admin/all', {
-    headers: { 'Content-Type': 'application/json' },
-    withCredentials: true,
-    credentials: 'include',
-  })
+//       const favorites=await axios.get('http://localhost:3000/api/favorites/admin/all', {
+//     headers: { 'Content-Type': 'application/json' },
+//     withCredentials: true,
+//     credentials: 'include',
+//   })
 
   const appointments=await axios.get("http://localhost:3000/api/appointments/admin/all", {
     headers: { 'Content-Type': 'application/json' },
@@ -30,7 +30,7 @@ try {
   
     const properties=await axios.get("http://localhost:3000/api/properties/")
 
-  setnumOfFavorites(favorites.data.length)
+//   setnumOfFavorites(favorites.data.length)
 setnumOfAppointments(appointments.data.length)
     setforRent((properties.data.filter((data)=>data.statusType==='for_rent')).length)
     setforSale((properties.data.filter((data)=>data.statusType==='for_sale')).length)
@@ -54,12 +54,12 @@ setnumOfAppointments(appointments.data.length)
     </ul>
     <div  className="border-t border-gray-200 dark:border-gray-600">
         <div className=" p-4 bg-white rounded-lg md:p-8 dark:bg-gray-800"  role="tabpanel" aria-labelledby="stats-tab">
-            <dl className="grid grid-cols-2 gap-8 p-4 mx-auto text-gray-900 sm:grid-cols-3 xl:grid-cols-6 dark:text-white sm:p-8">
+            <dl className="grid grid-cols-2 gap-8 p-4 mx-auto text-gray-900 sm:grid-cols-3 xl:grid-cols-5 dark:text-white sm:p-8">
                 <div className="flex flex-col items-center justify-center">
                     <dt className="mb-2 text-3xl font-extrabold">{numOfUsers}</dt>
                     <dd className="text-gray-500 dark:text-gray-400">{numOfUsers!=1?(`Usuarios registrados`):('Usuario registrado')}</dd>
                 </div>
-                <div className="flex flex-col items-center justify-center">
+                <div className="flex flex-col items-center justify-center ">
                     <dt className="mb-2 text-3xl font-extrabold">{numOfProperties}</dt>
                     <dd className="text-gray-500 dark:text-gray-400">Publicaciones</dd>
                 </div>
@@ -75,10 +75,10 @@ setnumOfAppointments(appointments.data.length)
                     <dt className="mb-2 text-3xl font-extrabold">{numOfAppointments}</dt>
                     <dd className="text-gray-500 dark:text-gray-400">{numOfAppointments!=1?(`Citas confirmadas`):(`Cita confirmada`)}</dd>
                 </div>
-                <div className="flex flex-col items-center justify-center">
+                {/* <div className="flex flex-col items-center justify-center">
                     <dt className="mb-2 text-3xl font-extrabold">{numOfFavorites}</dt>
                     <dd className="text-gray-500 dark:text-gray-400">{numOfFavorites!=1?(`Propiedades en favoritos`):(`Propiedad en favoritos`)}</dd>
-                </div>
+                </div> */}
         
             </dl>
         </div>

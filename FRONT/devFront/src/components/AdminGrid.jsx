@@ -19,7 +19,7 @@ const AdminGrid = ({fetchData}) => {
           withCredentials: true,
           credentials: "include",
         })
-        fetchData()
+        await fetchData()
       }
     } catch (error) {
       console.log('ocurrio un error al eliminar la propiedad',error);
@@ -45,12 +45,13 @@ const AdminGrid = ({fetchData}) => {
       
         {data.map((dataObject, index) => (
           <Fragment key={index}>
-            <Link to={`/home/${dataObject.type}/${dataObject.id}`}><div className="w-72 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl shadow-red-700">
-              <img
+            <div className="w-72 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl shadow-red-700">
+            <Link to={`/home/${dataObject.type}/${dataObject.id}`}><img
                 src={dataObject.imgURL ? dataObject.imgURL[0] : computer}
                 alt="Property"
                 className="h-80 w-72 object-cover rounded-t-xl"
-              />
+              />            </Link>
+
               <div className="px-4 py-3 w-72">
                 <span className="text-blue-400 mr-3 uppercase text-xs">
                   {dataObject.type === "property"
@@ -153,7 +154,6 @@ const AdminGrid = ({fetchData}) => {
                 </div>
               </div>
             </div>
-            </Link>
           </Fragment>
         ))}
       </section>{" "}
