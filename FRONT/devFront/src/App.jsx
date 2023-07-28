@@ -12,6 +12,7 @@ import { useEffect, useState } from 'react';
 import Stats from './view/Stats';
 import Search from './common/Search';
 import AddProperty from './components/AddProperty';
+import Appointments from './components/Appointments';
 
 
 function App() {
@@ -45,7 +46,7 @@ function App() {
 <>
 <Route path='/home/search' element={<Search/>}/>
 <Route path='home/admin/addProperty' element={<AddProperty/>}/>
-
+<Route path='home/admin/appointments' element={<Appointments/>}/>
 </>
 ) }
 

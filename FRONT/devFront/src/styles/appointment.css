@@ -1,0 +1,44 @@
+.card-container {
+    display: flex;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin: 10px;
+    padding: 10px;
+  }
+  
+  .card-image img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+  
+  .card-details {
+    margin-left: 20px;
+  }
+  
+  .date {
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+  
+  .user-details,
+  .property-details,
+  .date-location {
+    border-top: 1px solid #ccc;
+    padding-top: 10px;
+    margin-top: 10px;
+  }
+  
+  .property-details p {
+    margin: 5px 0;
+  }
+  
+ 
+  
+  
+  .location {
+    font-size: 14px;
+    color: #555;
+  }

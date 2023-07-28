@@ -89,7 +89,7 @@ const AdminNavbar = () => {
               aria-labelledby="dropdownAvatar"
             >
               <li>
-                <button className="flex items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+               <Link to={'/home/admin/appointments'}> <button className="flex items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
                   <svg
                     width="20px"
                     height="20px"
@@ -109,6 +109,7 @@ const AdminNavbar = () => {
                     Avisos contactados
                   </span>
                 </button>
+                </Link>
               </li>
               <li>
                 <button className="flex items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
