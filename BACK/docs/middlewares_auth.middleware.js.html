@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: middlewares/auth.middleware.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,36 +17,40 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: middlewares/auth.middleware.js</h1>
 
     
 
 
 
     
-
-
-    <h3> </h3>
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
     <section>
-        <article><h1>ProyectoP5</h1></article>
+        <article>
+            <pre class="prettyprint source linenums"><code>const { validateToken } = require("../config/tokens");
+
+/**
+ * Middleware para validar el token de autenticación de un usuario.
+ * 
+ * @param {Object} req - Objeto de solicitud HTTP.
+ * @param {Object} res - Objeto de respuesta HTTP.
+ * @param {Function} next - Función para pasar al siguiente middleware o controlador.
+ */
+
+let validateUser = (req, res, next) => {
+  let token = req.cookies.token;
+  let payload = validateToken(token);
+  req.user = payload;
+
+  if (payload !== null) {
+    return next();
+  }
+
+  res.send("Inicia sesión para una experiencia completa del sitio.");
+};
+
+module.exports = validateUser;</code></pre>
+        </article>
     </section>
-
-
 
 
 

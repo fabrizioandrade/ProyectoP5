@@ -51,7 +51,6 @@ userRouter.get("/admin/info/:id", validateAdmin, getOneUser);
 userRouter.get("/search/:query", validateAdmin, searchUser);
 userRouter.get("/auth/google", googleLogin);
 
-// Ruta de redirección después de autorización de Google
 userRouter.get("/auth/google/callback", googleCallback, (req, res) => {
   try {
     console.log("req", req);

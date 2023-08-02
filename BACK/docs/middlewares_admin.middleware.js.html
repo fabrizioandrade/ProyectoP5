@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: middlewares/admin.middleware.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,36 +17,49 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: middlewares/admin.middleware.js</h1>
 
     
 
 
 
     
-
-
-    <h3> </h3>
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
     <section>
-        <article><h1>ProyectoP5</h1></article>
+        <article>
+            <pre class="prettyprint source linenums"><code>const { validateToken } = require("../config/tokens");
+
+/**
+ * Middleware para verificar si el usuario tiene permisos de administrador.
+ * 
+ * @param {Object} req - Objeto de solicitud HTTP.
+ * @param {Object} res - Objeto de respuesta HTTP.
+ * @param {Function} next - Función para pasar al siguiente middleware o controlador.
+ */
+
+const validateAdmin = (req, res, next) => {
+  const token = req.cookies.token;
+
+  if (!token) {
+    return res.status(401).send("Acceso no autorizado. Token no encontrado.");
+  }
+
+  try {
+    const payload = validateToken(token);
+
+    if (payload.role === "admin") {
+      req.user = payload;
+      return next(); 
+    }
+
+    res.status(401).send("Acceso denegado. Se requiere permiso de administrador.");
+  } catch (error) {
+    res.status(401).send("Acceso no autorizado. Token inválido.");
+  }
+};
+
+module.exports = validateAdmin;</code></pre>
+        </article>
     </section>
-
-
 
 
 

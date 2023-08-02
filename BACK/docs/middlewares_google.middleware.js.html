@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: middlewares/google.middleware.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,36 +17,45 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: middlewares/google.middleware.js</h1>
 
     
 
 
 
     
-
-
-    <h3> </h3>
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
     <section>
-        <article><h1>ProyectoP5</h1></article>
+        <article>
+            <pre class="prettyprint source linenums"><code>const passport = require('passport');
+/**
+ * Middleware que inicia el proceso de autenticación con Google OAuth2.
+ * Redirige al usuario al sitio de Google para iniciar sesión o autorizar la aplicación.
+ * @function
+ * @name googleLogin
+ * @memberof module:middlewares/google.middleware
+ * @instance
+ */
+const googleLogin = passport.authenticate("google", { scope: ["profile", "email"] });
+
+/**
+ * Middleware que procesa la respuesta de autenticación de Google y llama al callback de autenticación.
+ * @function
+ * @name googleCallback
+ * @memberof module:middlewares/google.middleware
+ * @instance
+ * @param {Object} req - Objeto de solicitud (request).
+ * @param {Object} res - Objeto de respuesta (response).
+ * @param {Function} next - Función de middleware para pasar al siguiente middleware.
+ */
+const googleCallback = passport.authenticate("google", { session: false });
+
+/**
+ * Middleware que maneja la autenticación de Google utilizando Passport.js.
+ * @module middlewares/google.middleware
+ */
+module.exports = { googleLogin, googleCallback };</code></pre>
+        </article>
     </section>
-
-
 
 
 

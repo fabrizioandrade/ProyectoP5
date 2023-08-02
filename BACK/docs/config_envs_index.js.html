@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: config/envs/index.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,36 +17,38 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: config/envs/index.js</h1>
 
     
 
 
 
     
-
-
-    <h3> </h3>
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
     <section>
-        <article><h1>ProyectoP5</h1></article>
+        <article>
+            <pre class="prettyprint source linenums"><code>
+/**
+ * Configuración de variables de entorno para la base de datos.
+ * @module config
+ */
+
+require("dotenv").config();
+
+module.exports = {
+  DB_PORT: process.env.DB_PORT,
+  DB_HOST: process.env.DB_HOST,
+  DB_DIALECT: process.env.DB_DIALECT,
+  DB_NAME: process.env.DB_NAME,
+  DB_USER: process.env.DB_USER,
+  DB_PASSWORD: process.env.DB_PASSWORD,
+  SECRET_TOKEN:process.env.SECRET_TOKEN,
+  ADMIN_TOKEN:process.env.ADMIN_TOKEN,
+  GOOGLE_CLIENT_SECRET:process.env.GOOGLE_CLIENT_SECRET,
+  GOOGLE_CLIENT_ID:process.env.GOOGLE_CLIENT_ID
+
+};</code></pre>
+        </article>
     </section>
-
-
 
 
 
