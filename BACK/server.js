@@ -6,7 +6,9 @@ const cors = require("cors");
 const { DB_PORT } = require("./config/envs");
 const db = require("./models");
 const router = require("./routes");
-
+const passport = require("passport");
+const passportConfig=require('./config/passport.config')
+const session = require('express-session')
 /**
  * Middleware para registrar las solicitudes y respuestas en la consola durante el desarrollo.
  *
@@ -26,6 +28,14 @@ app.use(morgan("dev"));
  */
 app.use(express.json());
 
+app.use(
+  session({
+    secret: "mi_secreto_super_seguro",
+    resave: false,
+    saveUninitialized: false,
+  })
+);
+
 /**
  * Middleware para analizar las cookies en las solicitudes.
  *
@@ -34,6 +44,9 @@ app.use(express.json());
  * @name cookieParser
  */
 app.use(cookieParser());
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 /**
  * Middleware para habilitar CORS y configurar las opciones de origen y credenciales.

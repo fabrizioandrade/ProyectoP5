@@ -14,5 +14,8 @@ module.exports = {
   DB_USER: process.env.DB_USER,
   DB_PASSWORD: process.env.DB_PASSWORD,
   SECRET_TOKEN:process.env.SECRET_TOKEN,
-  ADMIN_TOKEN:process.env.ADMIN_TOKEN
+  ADMIN_TOKEN:process.env.ADMIN_TOKEN,
+  GOOGLE_CLIENT_SECRET:process.env.GOOGLE_CLIENT_SECRET,
+  GOOGLE_CLIENT_ID:process.env.GOOGLE_CLIENT_ID
+
 };

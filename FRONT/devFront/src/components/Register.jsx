@@ -11,6 +11,7 @@ const [isAdminCode, setIsAdminCode] = useState(false);
 const [adminCode, setAdminCode] = useState('');
 
 
+//Crear funciones
 const namePattern = /^[a-zA-Z\s]+$/; // Solo letras y espacios
 const phonePattern = /^\d+$/;
 
@@ -38,14 +39,15 @@ const handleAdminCodeToggle = () => {
         })
         .then((res) => {
           const { success, message } = res.data;
+          console.log(res.data);
           if (success) {
             alert(message);
             toggleAuthComponent();
-            alert(message);
           }
         })
         .catch((error) => {
-          alert(error.response.data);
+console.log(error);
+          alert(error.response.data.message);
         });
     } else {
       alert("Las contraseñas no coinciden");

@@ -100,7 +100,7 @@ const PropertyCard = () => {
                 ) : null}
               </ul>
             </div>
-            {user.role==='customer' && (  <div className="property-contact">
+            {user.role!=='admin' && (  <div className="property-contact">
               <form onSubmit={handleSubmit}>
                 <input
                   type="date"
