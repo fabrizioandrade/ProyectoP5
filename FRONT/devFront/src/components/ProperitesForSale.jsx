@@ -62,12 +62,15 @@ try {
 <div  className="w-72 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl shadow-red-700">
 <Link  to={`property/${property.id}`}> <img src={property.imgURL[0]} alt="Property" className="h-80 w-72 object-cover rounded-t-xl" /></Link>
       <div className="px-4 py-3 w-72">
-        <span className="text-blue-400 mr-3 uppercase text-xs">En venta</span>
-        <p className="text-lg font-bold text-blue-600 truncate block capitalize">{property.name}</p>
+      <p className="border-b border-indigo-300 flex gap-2 text-blue-400 mr-3 uppercase text-xs"><svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M12 21C15.5 17.4 19 14.1764 19 10.2C19 6.22355 15.866 3 12 3C8.13401 3 5 6.22355 5 10.2C5 14.1764 8.5 17.4 12 21Z" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M12 12C13.1046 12 14 11.1046 14 10C14 8.89543 13.1046 8 12 8C10.8954 8 10 8.89543 10 10C10 11.1046 10.8954 12 12 12Z" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg><span className='mt-0.5'>{`${property.city}, ${property.country}`}</span></p>
+        <p className="text-lg font-bold text-blue-600 truncate block capitalize border-b border-indigo-300">{property.name}</p>
         <div className="flex items-center">
-          <p className="text-lg font-semibold text-blue-700 cursor-auto my-3">USD{property.price}</p>
-          <div className="flex ml-10">
-                    <button onClick={()=>addToFavorite(property.id)} className="border border-gray-800">
+          <p className="text-lg font-semibold text-blue-700 cursor-auto my-3 border-r border-indigo-500 p-2">USD{property.price}</p>
+          <div className="flex ml-5 p-2">
+                    <button onClick={()=>addToFavorite(property.id)} className="border border-gray-800 ">
                       
                     <svg width="20px" height="20px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
     
@@ -82,8 +85,8 @@ try {
 </svg>
                     </button>
                     </div>
-          <div className="flex justify-between ml-5">
-                    <p className="text-sm text-blue-500">
+          <div className="flex justify-between ml-5 ">
+                    <p className="border-l border-indigo-500 p-2 text-sm text-blue-500">
                     {` ${property.descriptionData.beds} dorm. ${property.descriptionData.baths} baño ${property.descriptionData.garage==='true'?`1 coch.`:`0 coch.`}` }</p>
                   </div>
        

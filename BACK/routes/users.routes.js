@@ -4,13 +4,17 @@ const {
   loginUser,
   logOut,
   getAllUsers,
-  getOneUser,searchUser
+  getOneUser,
+  searchUser,
 } = require("../controllers/users.controllers");
 const validateUser = require("../middlewares/auth.middleware");
 const Joi = require("joi");
 const validateAdmin = require("../middlewares/admin.middleware");
-const passport = require("passport");
 const { generateToken } = require("../config/tokens");
+const {
+  googleCallback,
+  googleLogin,
+} = require("../middlewares/google.middleware");
 const userRouter = express.Router();
 
 const registerSchema = Joi.object({
@@ -45,31 +49,26 @@ userRouter.get("/me", validateUser, (req, res) => {
 userRouter.get("/admin", validateAdmin, getAllUsers);
 userRouter.get("/admin/info/:id", validateAdmin, getOneUser);
 userRouter.get("/search/:query", validateAdmin, searchUser);
-userRouter.get(
-  "/auth/google",
-  passport.authenticate("google", { scope: ["profile", "email"] })
-);
+userRouter.get("/auth/google", googleLogin);
 
 // Ruta de redirección después de autorización de Google
-userRouter.get(
-  "/auth/google/callback",
-  passport.authenticate("google", { session:false}),(req,res)=>{
-    try {
-      console.log('req',req);
-      if (req.user.success) {
-        const token = generateToken(req.user.data);
-        res.cookie("token", token);
-        res.redirect("http://localhost:5173/home");
-      } else {
-        res.redirect("http://localhost:5173/");
-      }
-    } catch (error) {
-      console.log("error", error);
-      return res.status(400).send({
-        success: false,
-        message: "Hubo un error en el inicio de sesión",
-      });
-    }}
-);
+userRouter.get("/auth/google/callback", googleCallback, (req, res) => {
+  try {
+    console.log("req", req);
+    if (req.user.success) {
+      const token = generateToken(req.user.data);
+      res.cookie("token", token);
+      res.redirect("http://localhost:5173/home");
+    } else {
+      res.redirect("http://localhost:5173/");
+    }
+  } catch (error) {
+    console.log("error", error);
+    return res.status(400).send({
+      success: false,
+      message: "Hubo un error en el inicio de sesión",
+    });
+  }
+});
 
 module.exports = userRouter;
