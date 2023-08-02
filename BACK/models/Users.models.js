@@ -66,12 +66,5 @@ Users.init(
   }
 );
 
-Users.prototype.hash = function (plainPassword, salt) {
-  return bcrypt.hash(plainPassword, salt);
-};
-
-Users.prototype.validatePassword = async function (plainPassword) {
-  return await bcrypt.compare(plainPassword, this.password);
-};
 
 module.exports = Users;

@@ -14,13 +14,16 @@ import Search from './common/Search';
 import AddProperty from './components/AddProperty';
 import Appointments from './components/Appointments';
 import AdminCustomerView from './view/AdminCustomerView';
+import UpdateUser from './common/UpdateUser';
+import ProperitesForSale from './components/ProperitesForSale';
+import PropertiesForRent from './components/PropertiesForRent';
 
 
 function App() {
   const location = useLocation();
   const user = useSelector((state) => state.user); 
   const [isUserVerified, setIsUserVerified] = useState(false);
-  const showNavbar = location.pathname !== '/' 
+  const showNavbar = location.pathname !== '/' && location.pathname !== '/update'
 
   useEffect(() => {
     if (user.role === 'admin') {
@@ -30,7 +33,12 @@ function App() {
       setIsUserVerified(false)
     }
   }, [user]);
-
+ 
+  useEffect(() => {
+    if (location.pathname === "/home") {
+      window.scrollTo(0, 0);
+    }
+  }, [location.pathname]);
 
   return (
     <div className=''>
@@ -39,9 +47,11 @@ function App() {
       <Route path={'/home'} element={user.role==='admin'?<Stats/>:<PropertiesGrid/>}/>
       <Route path={'/home/property/:id'} element={<PropertyCard/>}/>
       <Route path={'/home/me/profile'} element={user.email? <CustomerView/>:<AuthWrapper/>}/>
-     
+      <Route path={'/home/forSale'} element={<ProperitesForSale/>}/>
+      <Route path={'/home/forRent'} element={<PropertiesForRent/>}/>
+
         <Route path="/" element={<AuthWrapper />} /> 
-      
+      <Route path='/update' element={<UpdateUser/>}/>
         <Route path="/home/favorites" element={user.email?<Favorites />:<AuthWrapper/>} /> 
 {user.role==='admin' && (
 <>

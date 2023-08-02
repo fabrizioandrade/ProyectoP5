@@ -11,12 +11,12 @@ const AuthWrapper = () => {
 
   return (
     <div
-    className="bg-cover bg-center min-h-screen w-screen flex items-center"
+    className="bg-cover "
     style={{ backgroundImage: `url(${foto})` }}
   >
     <div className="container mx-auto px-4">
       <div className="grid grid-cols-1 md:grid-cols-3 ">
-        <div className="col-span-2 ">
+        <div className="col-span-2  flex items-center justify-center ">
           {showLogin ? (
             <Login toggleAuthComponent={toggleAuthComponent} />
           ) : (

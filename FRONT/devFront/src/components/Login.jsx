@@ -4,6 +4,7 @@ import { useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
 import { setUser } from "../state/user";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 export const Login = ({ toggleAuthComponent }) => {
   const [email, setEmail] = useState("");
@@ -76,23 +77,22 @@ export const Login = ({ toggleAuthComponent }) => {
     window.location.href = "http://localhost:3000/api/users/auth/google";
   };
   return (
-    <div>
-      <section className="bg-trasparent dark:bg-gray-900">
-        <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
-          <a
-            href="#"
+    <div className="">
+      <section className=" dark:bg-gray-900">
+        <div className="flex flex-col items-center justify-center px-6 py-8 lg:py-0">
+          <p
             className="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white"
           >
             <img className="w-8 h-8 mr-2" src={logo} alt="logo" />
             DevHouse
-          </a>
+          </p>
           <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
             <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
               <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                 Sign in to your account
               </h1>
               <form
-                className="space-y-4 md:space-y-6"
+                className=" md:space-y-3"
                 action="#"
                 onSubmit={handleSubmit}
               >
@@ -132,7 +132,6 @@ export const Login = ({ toggleAuthComponent }) => {
                 </div>
                 <div className="flex items-center justify-between">
                   <div className="flex items-start">
-                    <div className="flex items-center h-5"></div>
                     <div className="ml-3 text-sm">
                       <button
                         onClick={() => navigate("/home")}
@@ -144,12 +143,10 @@ export const Login = ({ toggleAuthComponent }) => {
                       </button>
                     </div>
                   </div>
-                  <a
-                    href="#"
-                    className="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500"
+                  <Link to={'/update'}                    className="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500"
                   >
                     Forgot password?
-                  </a>
+                  </Link>
                 </div>
                 <button
                   type="submit"
@@ -158,7 +155,7 @@ export const Login = ({ toggleAuthComponent }) => {
                 >
                   Sign in
                 </button>
-                <p className="text-center text-sm text-gray-500 dark:text-gray-400">
+                <p className="text-center text-sm text-gray-500 dark:text-gray-400 ">
                   or
                 </p>
 
@@ -166,7 +163,7 @@ export const Login = ({ toggleAuthComponent }) => {
                   <button
                     type="submit"
                     name="loginWithGoogleButton"
-                    className="w-full py-2.5 flex items-center justify-center rounded-lg text-sm font-medium text-slate-700 bg-white hover:border-slate-400 hover:text-slate-900 hover:shadow transition duration-150 dark:bg-gray-900 dark:text-white dark:hover:bg-opacity-0 dark:hover:border-transparent dark:focus:border-transparent dark:focus:ring-4 dark:focus:ring-blue-500 dark:focus:outline-none"
+                    className="w-full py-2.5 flex  items-center justify-center rounded-lg text-sm font-medium text-slate-700 bg-white hover:border-slate-400 hover:text-slate-900 hover:shadow transition duration-150 dark:bg-gray-900 dark:text-white dark:hover:bg-opacity-0 dark:hover:border-transparent dark:focus:border-transparent dark:focus:ring-4 dark:focus:ring-blue-500 dark:focus:outline-none"
                   >
                     <img
                       className="w-6 h-6 mr-2"

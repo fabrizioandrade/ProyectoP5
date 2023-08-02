@@ -54,10 +54,10 @@ console.log(error);
     }
   };
   return (
-    <div className="flex items-center w-screen h-screen overflow-y-auto">
-      <section className="bg-transparent dark:bg-gray-900 h-full">
-        <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
-          <a href="#" className="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
+    <div >
+      <section className="dark:bg-gray-900 ">
+        <div className="flex flex-col items-center justify-center px-6 py-8 lg:py-0">
+          <a className="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
             <img className="w-8 h-8 mr-2" src={logo} alt="logo" />
             devHouse
           </a>
@@ -66,7 +66,7 @@ console.log(error);
               <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                 Registrarse
               </h1>
-              <form className="space-y-1 md:space-y-6" action="#" onSubmit={handleSubmit}>
+              <form className=" md:space-y-4" onSubmit={handleSubmit}>
                 <div>
                   <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                     Name
@@ -76,7 +76,7 @@ console.log(error);
                     type="text"
                     name="name"
                     id="name"
-                    className="input-field"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="username"
                     required
                     pattern={namePattern.source}
@@ -92,7 +92,7 @@ console.log(error);
                     type="email"
                     name="email"
                     id="email"
-                    className="input-field"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="name@company.com"
                     required
                   />
@@ -107,7 +107,7 @@ console.log(error);
                     name="password"
                     id="password"
                     placeholder="••••••••"
-                    className="input-field"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     required
                   />
                 </div>
@@ -121,7 +121,7 @@ console.log(error);
                     name="confirm-password"
                     id="confirm-password"
                     placeholder="••••••••"
-                    className="input-field"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     required
                   />
                 </div>
@@ -135,7 +135,7 @@ console.log(error);
                     type="tel"
                     name="phone"
                     id="phone"
-                    className="input-field"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="phone number"
                     required
                     pattern={phonePattern.source}
@@ -149,7 +149,8 @@ console.log(error);
                 {isAdminCode && (
                   <div>
                     <label htmlFor="admin-code-input">Admin Code:</label>
-                    <input type="text" id="admin-code-input" value={adminCode} onChange={handleAdminCode} required />
+                    <input type="text" className='bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500' id="admin-code-input"                     placeholder="admin code"
+ value={adminCode} onChange={handleAdminCode} required />
                   </div>
                 )}
                 <div className="flex items-start">

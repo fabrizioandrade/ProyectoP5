@@ -11,26 +11,8 @@ const Navbar = () => {
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [typeProperty, setTypeProperty] = useState(null);
 
-  const fetchData = async () => {
-    try {
-      let url = "http://localhost:3000/api/properties/";
-
-      if (typeProperty) {
-        url = `http://localhost:3000/api/properties/status/${typeProperty}`;
-      }
-
-      const response = await axios.get(url);
-      const sortedProperties= response.data.sort((a, b) => a.id - b.id);
-      dispatch(setProperties(sortedProperties));
-    } catch (error) {
-      console.log("Error al obtener los productos:", error);
-    }
-  };
-  useEffect(() => {
-    fetchData();
-  }, [typeProperty]);
+ 
 
   useEffect(() => {
     axios
@@ -61,14 +43,14 @@ const Navbar = () => {
 
 
   return (
-    <nav className="navbar bg-red-500 p-4  top-0 left-0 w-full">
+    <nav className="navbar bg-red-500 p-4  top-0 left-0 w-full ">
       <div className="container mx-auto flex justify-between items-center">
         <Link to={'/home'}><div className="text-black transparent-text font-bold">HOD.</div></Link>
         <div className="space-x-4">
-        <button onClick={()=>setTypeProperty(null)} className="text-white focus:ring">Descubre</button>
-          <button onClick={()=>setTypeProperty('for_sale')}     className="text-white   focus:ring ">En venta</button>
+        <button onClick={()=>navigate('/home')} className="text-white focus:ring">Descubre</button>
+          <button onClick={()=>navigate('/home/forSale')} className="text-white   focus:ring ">En venta</button>
           
-          <button onClick={()=>setTypeProperty('for_rent')}  className="text-white focus:ring">En alquiler</button>
+          <button onClick={()=>navigate('/home/forRent')} className="text-white focus:ring">En alquiler</button>
           {user.name ? (
             <>
 
@@ -84,7 +66,7 @@ const Navbar = () => {
                   Mi perfil
                 </button>
                 <div
-                  className={`origin-top-right absolute right-0 mt-2 w-40 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 ${
+                  className={`origin-top-right absolute right-0 mt-2 w-40 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-10 ${
                     isDropdownOpen ? 'block' : 'hidden'
                   }`}
                   role="menu"
