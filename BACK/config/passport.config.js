@@ -12,6 +12,7 @@ passportConfig.use(
       clientSecret: GOOGLE_CLIENT_SECRET,
       callbackURL: 'http://localhost:3000/api/users/auth/google/callback',
       scope: ["profile", "email"],
+      proxy:true
     },
     async (accessToken, refreshToken, profile, done) => {
       try {
@@ -30,8 +31,7 @@ passportConfig.use(
           phone: user.phone,
           role: user.role,
         };
-        const token = generateToken(payload);
-        return done(null, { data:payload, token:token,success:true,status:200 });
+        return done(null, { data:payload,success:true,status:200 });
       } catch (error) {
         return done(error);
       }

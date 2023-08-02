@@ -10,6 +10,7 @@ const validateUser = require("../middlewares/auth.middleware");
 const Joi = require("joi");
 const validateAdmin = require("../middlewares/admin.middleware");
 const passport = require("passport");
+const { generateToken } = require("../config/tokens");
 const userRouter = express.Router();
 
 const registerSchema = Joi.object({
@@ -52,25 +53,23 @@ userRouter.get(
 // Ruta de redirección después de autorización de Google
 userRouter.get(
   "/auth/google/callback",
-  passport.authenticate("google", { session:true}),(req,res)=>{
-try {   
-  if (req.user.success) {
-  res.cookie("token", req.user.token);
-}
-
-return res.status(200).send({
-  success: req.user.success,
-  data: req.user.data,
-});
-  
-} catch (error) {
-  console.log('errror',error);
-  return res.status(400).send({
-    success: false,
-    message: "Hubo un error en el inicio de sesión",
-  });
-}
-  }
+  passport.authenticate("google", { session:false}),(req,res)=>{
+    try {
+      console.log('req',req);
+      if (req.user.success) {
+        const token = generateToken(req.user.data);
+        res.cookie("token", token);
+        res.redirect("http://localhost:5173/home");
+      } else {
+        res.redirect("http://localhost:5173/");
+      }
+    } catch (error) {
+      console.log("error", error);
+      return res.status(400).send({
+        success: false,
+        message: "Hubo un error en el inicio de sesión",
+      });
+    }}
 );
 
 module.exports = userRouter;
