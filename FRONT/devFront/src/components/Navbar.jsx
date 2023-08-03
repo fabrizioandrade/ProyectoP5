@@ -107,7 +107,8 @@ else{
               <button className="text-white hover:text-gray-200">Iniciar sesión</button>
             </Link>
           )}
-          <button className="text-white hover:text-gray-200">Contacto</button>
+          <Link to={'/home/contact'}>
+          <button className="text-white hover:text-gray-200">Contacto</button></Link>
         </div>
       </div>
     </nav>

@@ -18,6 +18,7 @@ import UpdateUser from './common/UpdateUser';
 import ProperitesForSale from './components/ProperitesForSale';
 import PropertiesForRent from './components/PropertiesForRent';
 import CustomerAppointments from './common/CustomerAppointments';
+import ContactForm from './common/ContactForm';
 
 
 function App() {
@@ -69,6 +70,7 @@ function App() {
       <Route path={'/home/forSale'} element={<ProperitesForSale />}/>
       <Route path={'/home/forRent'} element={<PropertiesForRent/>}/>
 
+      <Route path={'/home/contact'} element={<ContactForm/>}/>
         <Route path="/" element={<AuthWrapper />} /> 
       <Route path='/update' element={<UpdateUser/>}/>
         <Route path="/home/favorites" element={user.email?<Favorites />:<AuthWrapper/>} /> 

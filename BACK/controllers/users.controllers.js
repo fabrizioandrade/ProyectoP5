@@ -1,6 +1,7 @@
 const { Sequelize } = require("sequelize");
 const Users = require("../models/Users.models");
 const UserService = require("../services/user.services");
+const sendEmail = require("../utils/gmail.utils");
 
 const createUser = async (req, res) => {
   try {
@@ -108,4 +109,43 @@ const searchUser=async(req,res)=>{
     });
   }
 }
-module.exports = { createUser, loginUser, logOut ,getAllUsers,getOneUser,searchUser};
+
+const contactAdmin=async(req,res)=>{
+  const {userId}=req.params
+  const message=req.body.data
+console.log(typeof(message));
+try {
+   let user = await Users.findOne({
+        where: {
+          id: userId,
+        },
+      });
+if (!user) {
+        return {
+          success: false,
+          status: 401,
+          message: "Usuario incorrecto/inexistente.",
+        } }
+
+  else{
+
+    const mailOptions = {
+      from: 'devhouse@gmail.com',
+      to: 'fabrizioandrade989@gmail.com',
+      subject: 'Solicitud de contacto',
+      text:'contacto',
+      html: `<h1${message}</h1>`
+    };
+    await sendEmail(mailOptions)
+
+
+    return res.status(200).send({
+      success:true,
+      message: 'se envio el mail',
+    });  }
+} catch (error) {
+  console.log(error
+    );
+}
+}
+module.exports = { createUser, loginUser, logOut ,getAllUsers,getOneUser,searchUser,contactAdmin};

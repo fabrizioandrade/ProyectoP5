@@ -12,7 +12,7 @@ const oauth2Client = new google.auth.OAuth2(
 oauth2Client.setCredentials({refresh_token:GMAIL_REFRESH_TOKEN})
 
 
-async function sendEmail(){
+async function sendEmail(customerMail){
     try {
         const accesstoken=await oauth2Client.getAccessToken()
         const transport=nodemailer.createTransport({
@@ -36,6 +36,10 @@ async function sendEmail(){
             text:'Gracias por agendar la cita',
             html: `<h1>Su cita ha sido confirmada</h1><p>Pronto estaremos en contacto.</p><p>Haga clic <a href="http://localhost:5173/home">aquí</a> para visitar la página.</p>`
           };
+        if(customerMail){
+            const result = await transport.sendMail(customerMail)
+        return result
+        }
         const result = await transport.sendMail(mailOptions)
         return result
         } catch (error) {
