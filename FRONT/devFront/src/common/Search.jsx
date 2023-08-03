@@ -74,7 +74,7 @@ const Search = () => {
           className="absolute top-0 right-0 bottom-0 left-0 z-0 bg-cover bg-center opacity-1"
           style={{
             opacity: "1",
-            backgroundImage: `url(https://tpc.googlesyndication.com/simgad/1331746288206344314?)`,
+            backgroundImage: `url(https://imgar.zonapropcdn.com/avisos/1/00/51/31/40/80/360x266/1858695051.jpg)`,
           }}
         ></div>
         <form className="flex justify-center items-center w-full max-w-md mx-auto">

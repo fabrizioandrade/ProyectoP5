@@ -7,6 +7,7 @@ const {
   getOneUser,
   searchUser,
   contactAdmin,
+  updateUser
 } = require("../controllers/users.controllers");
 const validateUser = require("../middlewares/auth.middleware");
 const Joi = require("joi");
@@ -43,6 +44,7 @@ userRouter.post("/login", loginUser);
 
 userRouter.post("/logout", logOut);
 userRouter.post('/contact/admin/:userId',validateUser,contactAdmin)
+userRouter.put('/update',updateUser)
 
 userRouter.get("/me", validateUser, (req, res) => {
   res.status(200).send({ status: "OK", ...req.user });

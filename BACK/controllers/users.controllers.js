@@ -2,6 +2,7 @@ const { Sequelize } = require("sequelize");
 const Users = require("../models/Users.models");
 const UserService = require("../services/user.services");
 const sendEmail = require("../utils/gmail.utils");
+const bcrypt = require("bcrypt");
 
 const createUser = async (req, res) => {
   try {
@@ -148,4 +149,32 @@ if (!user) {
     );
 }
 }
-module.exports = { createUser, loginUser, logOut ,getAllUsers,getOneUser,searchUser,contactAdmin};
+
+
+const updateUser = async (req, res) => {
+  const { email, password } = req.body;
+  console.log(req.body);
+  const user = await Users.findOne({ where: { email :email} });
+
+  if (!user) {
+    return res.status(404).send({message:'Usuario no encontrado',status:404});
+  }
+
+  if (password) {
+    const salt = user.salt;
+    const hash = await bcrypt.hash(password, salt);
+
+    req.body.password = hash;
+  } else {
+    delete req.body.password; 
+  }
+
+  const updatedUser = await Users.update(req.body, {
+    where: { email },
+    returning: true,
+  });
+
+  res.status(202).send(updatedUser);
+};
+
+module.exports = { createUser, loginUser, logOut ,getAllUsers,getOneUser,searchUser,contactAdmin,updateUser};

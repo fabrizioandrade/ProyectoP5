@@ -9,8 +9,6 @@ const AddProperty = () => {
   const [category, setCategory] = useState("");
   const [price, setPrice] = useState(null);
   const [baths, setBaths] = useState(null);
-  const [status, setStatus] = useState(true);
-  const [statusType, setstatusType] = useState('');
   const [beds, setBeds] = useState(null);
   const [imgURL, setImgURL] = useState([""]);
   const [neighborhood, setNeighborhood] = useState("");
@@ -52,11 +50,11 @@ const AddProperty = () => {
 
     const productData = {
       name: name,
-      description: description,
+      description:description,
       descriptionData: {baths:`${bathsInt}`,beds:`${bedsInt}`,garage:`${hasGarage}`},
       category: category,
-      status: status,
-      statusType:statusType,
+      status: true,
+      statusType:"for_sale",
       price:priceInt,
       imgURL:imgURL,
       neighborhood:neighborhood,
@@ -119,7 +117,7 @@ const AddProperty = () => {
               </label>
               <div className="mt-2">
                 <textarea
-                value={description}
+                value={'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin eu turpis eu odio cursus volutpat. In aliquam nulla sit amet ultricies suscipit'}
                 onChange={(e) => setDescription(e.target.value)}
                 maxlength="20" minlength="5"
                 rows={2}
@@ -274,6 +272,7 @@ const AddProperty = () => {
               </label>
               <div className="mt-2">
                 <input
+                  onChange={(e) => setBeds(e.target.value)}
                   required
                   type="number"
                   name="descriptionData.beds"
@@ -309,25 +308,7 @@ const AddProperty = () => {
               </div>
             </div>
 
-            <div className="sm:col-span-3">
-              <label
-                htmlFor="statusType"
-                className="block text-sm font-medium leading-6 text-gray-900"
-              >
-                Status Type
-              </label>
-              <div className="mt-2">
-                <input
-                value={statusType}
-                onChange={(e) => setstatusType(e.target.value)}
-                  required
-                  type="text"
-                  name="statusType"
-                  id="statusType"
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                />
-              </div>
-            </div>
+            
 
             <div className="sm:col-span-4">
               <label
