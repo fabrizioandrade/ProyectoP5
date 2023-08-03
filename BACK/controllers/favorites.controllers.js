@@ -39,9 +39,15 @@ const addFavorite = async (req, res) => {
 
     const favorite = await Favorites.create({ userId });
     await favorite.addProperty(property); /**Este método es automáticamente generado debido a la asociación belongsToMany */
+    const favs= await Favorites.findAll({
+      where: { userId },
+      include: [Properties],
+    });
+    const validFavorites = favs.flatMap((fav) => fav.properties);
+
     return res
       .status(200)
-      .json({ message: "Propiedad agregada a favoritos exitosamente" });
+      .json({ message: "Propiedad agregada a favoritos exitosamente" ,allFavorites:validFavorites});
   } catch (error) {
     console.error("Error al agregar propiedad a favoritos:", error);
     return res

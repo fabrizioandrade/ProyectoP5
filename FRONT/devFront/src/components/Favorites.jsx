@@ -9,7 +9,7 @@ const Favorites = () => {
   const dispatch = useDispatch();
 
  
-
+console.log('favorties view',favorites);
   useEffect(() => {
     if (user.id) {
       axios

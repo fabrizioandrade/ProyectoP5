@@ -11,7 +11,7 @@ const AuthWrapper = () => {
 
   return (
     <div
-    className="bg-cover "
+    className="bg-cover h-screen"
     style={{ backgroundImage: `url(${foto})` }}
   >
     <div className="container mx-auto px-4">
