@@ -34,7 +34,7 @@ async function sendEmail(){
             to: 'fabrizioandrade989@gmail.com',
             subject: 'Confirmacion de cita',
             text:'Gracias por agendar la cita',
-            html: '<h1>Su cita ha sido confirmada</h1><p>Pronto estaremos en contacto.</p>'
+            html: `<h1>Su cita ha sido confirmada</h1><p>Pronto estaremos en contacto.</p><p>Haga clic <a href="http://localhost:5173/home">aquí</a> para visitar la página.</p>`
           };
         const result = await transport.sendMail(mailOptions)
         return result
