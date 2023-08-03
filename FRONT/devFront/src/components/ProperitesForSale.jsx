@@ -31,26 +31,61 @@ const ProperitesForSale = () => {
         fetchData();
       }, []);
 
-const addToFavorite=async(propertyId)=>{
-try {
 
-  if (!user || !user.id) {
-    alert("Inicia sesion para continuar")
-    return;
-  }
-
-  const response = await axios.post(`http://localhost:3000/api/favorites/add/${user.id}`, { propertyId },{
-    withCredentials: true,
-    credentials: 'include',
-  });
-  dispatch(setFavorites(response.data.validFavorites))
-
-  alert(response.data.message);
-} catch (error) {
- console.log('ocurrio un error al agregar a favoritos',error); 
- alert(error.response.data.error)
-}
-}
+      const addToFavorite = async (propertyId) => {
+        try {
+          if (!user || !user.id) {
+            alert("Inicia sesion para continuar");
+            return;
+          }
+    
+          const response = await axios.post(
+            `http://localhost:3000/api/favorites/add/${user.id}`,
+            { propertyId },
+            {
+              withCredentials: true,
+              credentials: "include",
+            }
+          );
+    
+          const response2 = await  axios
+          .get(`http://localhost:3000/api/favorites/${user.id}`, {
+            headers: { "Content-Type": "application/json" },
+            withCredentials: true,
+            credentials: "include",
+          })
+          dispatch(setFavorites(response2.data.validFavorites))
+          alert(response.data.message);
+        } catch (error) {
+          console.log("ocurrio un error al agregar a favoritos", error);
+          alert(error.response.data.error);
+        }
+      };
+      
+      const removeFromFavorite = async(propertyId) => {
+        try {
+          await axios
+          .delete(
+            `http://localhost:3000/api/favorites/remove/${user.id}`, {
+              data: { id: propertyId }, 
+              headers: { "Content-Type": "application/json" },
+              withCredentials: true,
+              credentials: "include",
+            }
+          )
+    
+          const response = await  axios
+          .get(`http://localhost:3000/api/favorites/${user.id}`, {
+            headers: { "Content-Type": "application/json" },
+            withCredentials: true,
+            credentials: "include",
+          })
+          dispatch(setFavorites(response.data.validFavorites))
+        } catch (error) {
+          console.error("no se elimino de favoritos", error);
+          
+        }
+      };
 
   return (
     <div className="w-screen h-screen ">
@@ -70,20 +105,50 @@ try {
         <div className="flex items-center">
           <p className="text-lg font-semibold text-blue-700 cursor-auto my-3 border-r border-indigo-500 p-2">USD{property.price}</p>
           <div className="flex ml-5 p-2">
-                    <button onClick={()=>addToFavorite(property.id)} className="border border-gray-800 ">
-                      
-                    <svg width="20px" height="20px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
-    
-  
-    <g id="Page-1" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd" sketch:type="MSPage">
-        <g id="Icon-Set" sketch:type="MSLayerGroup" transform="translate(-152.000000, -879.000000)" fill="#000000">
-            <path d="M168,903.21 L160.571,907.375 L161.989,898.971 L155.594,892.442 L164.245,891.317 L168,883.313 L171.722,891.317 L180.344,892.54 L174.011,899.002 L175.335,907.406 L168,903.21 L168,903.21 Z M184,891.244 L172.962,889.56 L168,879 L163.038,889.56 L152,891.244 L159.985,899.42 L158.095,911 L168,905.53 L177.905,911 L176.015,899.42 L184,891.244 L184,891.244 Z" id="start-favorite" sketch:type="MSShapeGroup">
-
-</path>
-        </g>
-    </g>
-</svg>
-                    </button>
+          {favorites?.some(object=>object.id===property.id) ? (
+                      <button
+                        onClick={() => removeFromFavorite(property.id)}
+                        className="border border-gray-800 "
+                      >
+                      <svg fill="#000000" width="20px" height="20px" viewBox="0 0 1000 1000" xmlns="http://www.w3.org/2000/svg"><path d="M476 801l-181 95q-18 10-36.5 4.5T229 879t-7-36l34-202q2-12-1.5-24T242 596L95 453q-15-14-15.5-33.5T91 385t32-18l203-30q12-2 22-9t16-18l90-184q10-18 28-25t36 0 28 25l90 184q6 11 16 18t22 9l203 30q20 3 32 18t11.5 34.5T905 453L758 596q-8 9-12 21t-2 24l34 202q4 20-7 36t-29.5 21.5T705 896l-181-95q-11-6-24-6t-24 6z"/></svg>
+                      </button>                    ) : (
+                      <button
+                        onClick={() => addToFavorite(property.id)}
+                        className="border border-gray-800 "
+                      >
+                        <svg
+                          width="20px"
+                          height="20px"
+                          viewBox="0 0 32 32"
+                          version="1.1"
+                          xmlns="http://www.w3.org/2000/svg"
+                          xmlnsXlink="http://www.w3.org/1999/xlink"
+                          xmlns:sketch="http://www.bohemiancoding.com/sketch/ns"
+                        >
+                          <g
+                            id="Page-1"
+                            stroke="none"
+                            strokeWidth="1"
+                            fill="none"
+                            fillRule="evenodd"
+                            sketch:type="MSPage"
+                          >
+                            <g
+                              id="Icon-Set"
+                              sketch:type="MSLayerGroup"
+                              transform="translate(-152.000000, -879.000000)"
+                              fill="#000000"
+                            >
+                              <path
+                                d="M168,903.21 L160.571,907.375 L161.989,898.971 L155.594,892.442 L164.245,891.317 L168,883.313 L171.722,891.317 L180.344,892.54 L174.011,899.002 L175.335,907.406 L168,903.21 L168,903.21 Z M184,891.244 L172.962,889.56 L168,879 L163.038,889.56 L152,891.244 L159.985,899.42 L158.095,911 L168,905.53 L177.905,911 L176.015,899.42 L184,891.244 L184,891.244 Z"
+                                id="start-favorite"
+                                sketch:type="MSShapeGroup"
+                              ></path>
+                            </g>
+                          </g>
+                        </svg>
+                      </button>
+                    )}
                     </div>
           <div className="flex justify-between ml-5 ">
                     <p className="border-l border-indigo-500 p-2 text-sm text-blue-500">

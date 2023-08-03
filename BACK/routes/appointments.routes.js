@@ -5,7 +5,7 @@ const { createAppointment, getAppointment, deleteAppointment,updateAppointment, 
 
 const appointmentsRouter=express.Router()
 
-appointmentsRouter.get('/:userId',validateUser, getAppointment)
+appointmentsRouter.get('/get/all/by/:userId',validateUser, getAppointment)
 appointmentsRouter.get('/admin/all',validateAdmin, getAllAppointments)
 appointmentsRouter.post('/create/:userId',validateUser, createAppointment)
 appointmentsRouter.delete('/one/:userId/:appointmentId',validateUser, deleteAppointment)

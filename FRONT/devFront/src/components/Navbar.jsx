@@ -69,6 +69,9 @@ else{
 
             <Link to={'/home/favorites'}>
               <button className="text-white hover:text-gray-200">Favoritos</button></Link>
+
+            <Link to={'/home/appointments'}>
+              <button className="text-white hover:text-gray-200">Citas</button></Link>
               <div className="relative inline-block text-left">
                 <button
                   onClick={()=>setIsDropdownOpen(!isDropdownOpen)}

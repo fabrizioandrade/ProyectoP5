@@ -17,6 +17,7 @@ import AdminCustomerView from './view/AdminCustomerView';
 import UpdateUser from './common/UpdateUser';
 import ProperitesForSale from './components/ProperitesForSale';
 import PropertiesForRent from './components/PropertiesForRent';
+import CustomerAppointments from './common/CustomerAppointments';
 
 
 function App() {
@@ -71,6 +72,7 @@ function App() {
         <Route path="/" element={<AuthWrapper />} /> 
       <Route path='/update' element={<UpdateUser/>}/>
         <Route path="/home/favorites" element={user.email?<Favorites />:<AuthWrapper/>} /> 
+        <Route path="/home/appointments" element={user.email?<CustomerAppointments />:<AuthWrapper/>} /> 
 {user.role==='admin' && (
 <>
 <Route path='/home/user/:id' element={<AdminCustomerView/>}/>
