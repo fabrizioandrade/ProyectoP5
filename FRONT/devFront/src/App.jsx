@@ -24,7 +24,6 @@ function App() {
   const user = useSelector((state) => state.user); 
   const [isUserVerified, setIsUserVerified] = useState(false);
   const showNavbar = location.pathname !== '/' && location.pathname !== '/update'
-
   useEffect(() => {
     if (user.role === 'admin') {
       setIsUserVerified(true);
@@ -40,14 +39,16 @@ function App() {
     }
   }, [location.pathname]);
 
+
+
   return (
     <div className=''>
  {showNavbar && (isUserVerified? <AdminNavbar />:<Navbar/>)}
       <Routes>
-      <Route path={'/home'} element={user.role==='admin'?<Stats/>:<PropertiesGrid/>}/>
+      <Route path={'/home'} element={user.role==='admin'?<Stats/>:<PropertiesGrid />}/>
       <Route path={'/home/property/:id'} element={<PropertyCard/>}/>
       <Route path={'/home/me/profile'} element={user.email? <CustomerView/>:<AuthWrapper/>}/>
-      <Route path={'/home/forSale'} element={<ProperitesForSale/>}/>
+      <Route path={'/home/forSale'} element={<ProperitesForSale />}/>
       <Route path={'/home/forRent'} element={<PropertiesForRent/>}/>
 
         <Route path="/" element={<AuthWrapper />} /> 

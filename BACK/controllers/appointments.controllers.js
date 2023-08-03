@@ -1,6 +1,7 @@
 const Appointments = require("../models/Appointments.models.");
 const Properties = require("../models/Properties.models.");
 const Users = require("../models/Users.models");
+const sendEmail = require("../utils/gmail.utils");
 
 const createAppointment = async (req, res) => {
   try {
@@ -56,6 +57,9 @@ const createAppointment = async (req, res) => {
     });
 
     property.availableDates = availableDates;
+
+    const emailResult = await sendEmail();
+    console.log("Email sent successfully:", emailResult);
 
     return res
       .status(201)

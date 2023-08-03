@@ -11,7 +11,6 @@ const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const Users = require('../models/Users.models');
 const { GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET } = require('./envs');
 const { faker } = require('@faker-js/faker');
-const { generateToken } = require('./tokens');
 
 
 /**
@@ -35,7 +34,6 @@ passportConfig.use(
           const randomPassword=faker.string.numeric(5)
 
           const userData={ name:profile.displayName, email:profile.emails[0].value, password:randomPassword, phone:faker.phone.number().replace(/\D/g, ''), code:'' }
-          // Si el usuario no existe, crearlo en la base de datos
           user = await Users.create(userData);
         }
         const payload = {

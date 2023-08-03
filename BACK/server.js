@@ -3,7 +3,7 @@ const express = require("express");
 const morgan = require("morgan");
 const app = express();
 const cors = require("cors");
-const { DB_PORT } = require("./config/envs");
+const { DB_PORT} = require("./config/envs");
 const db = require("./models");
 const router = require("./routes");
 const passport = require("passport");
@@ -44,6 +44,11 @@ app.use(
  * @name cookieParser
  */
 app.use(cookieParser());
+
+
+
+
+
 
 app.use(passport.initialize());
 app.use(passport.session());

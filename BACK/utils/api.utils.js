@@ -12,7 +12,7 @@ const propertiesForSale = async () => {
         description: faker.lorem.paragraph(),
         descriptionData:{baths:Math.floor(Math.random() * 6),beds:Math.floor(Math.random() * 3),garage:faker.datatype.boolean()},
         category: ["departamento", "PH", "casa", "terreno", "local"][Math.floor(Math.random() * 5)],
-        status: true, // Valor predeterminado: true
+        status: true, 
         statusType:['for_sale','for_rent'][Math.floor(Math.random()*2)],
         price: faker.commerce.price(),
         imgURL: [faker.image.url()],

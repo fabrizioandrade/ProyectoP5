@@ -47,7 +47,9 @@ const Navbar = () => {
       <div className="container mx-auto flex justify-between items-center">
         <Link to={'/home'}><div className="text-black transparent-text font-bold">HOD.</div></Link>
         <div className="space-x-4">
-        <button onClick={()=>navigate('/home')} className="text-white focus:ring">Descubre</button>
+        <button onClick={()=>navigate('/home')} className="text-white focus:ring"><a href="#propertiesGrid" >
+    Descubre
+  </a></button>
           <button onClick={()=>navigate('/home/forSale')} className="text-white   focus:ring ">En venta</button>
           
           <button onClick={()=>navigate('/home/forRent')} className="text-white focus:ring">En alquiler</button>

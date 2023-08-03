@@ -28,15 +28,12 @@ const registerSchema = Joi.object({
 userRouter.post(
   "/register",
   (req, res, next) => {
-    // Valida los datos del registro usando el esquema
     const { error } = registerSchema.validate(req.body);
     if (error) {
-      // Si hay un error de validación, devuelve una respuesta de error
       return res
         .status(400)
         .send({ success: false, message: error.details[0].message });
     }
-    // Si los datos son válidos, llama a la función createUser
     next();
   },
   createUser
