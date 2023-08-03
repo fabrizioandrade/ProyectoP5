@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { UserinitialState, setUser } from '../state/user';
 import { useNavigate } from 'react-router';
 import { Link } from 'react-router-dom';
-import { setProperties } from '../state/properties';
+import { setButtons } from '../state/buttons';
 
 const Navbar = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -40,19 +40,30 @@ const Navbar = () => {
         navigate('/');
       });
   };
+const handleButton=(button)=>{
+if(button==='sale'){
+  dispatch(setButtons('sale'))
+  navigate('/home/forSale')
+}
+else{
+  dispatch(setButtons('rent'))
+  navigate('/home/forRent')
+}
 
+}
 
   return (
     <nav className="navbar bg-red-500 p-4  top-0 left-0 w-full ">
       <div className="container mx-auto flex justify-between items-center">
         <Link to={'/home'}><div className="text-black transparent-text font-bold">HOD.</div></Link>
         <div className="space-x-4">
-        <button onClick={()=>navigate('/home')} className="text-white focus:ring"><a href="#propertiesGrid" >
+        <button onClick={()=>  navigate('/home')
+} className="text-white focus:ring">
     Descubre
-  </a></button>
-          <button onClick={()=>navigate('/home/forSale')} className="text-white   focus:ring ">En venta</button>
+  </button>
+          <button onClick={()=>handleButton('sale')} className="text-white   focus:ring ">En venta</button>
           
-          <button onClick={()=>navigate('/home/forRent')} className="text-white focus:ring">En alquiler</button>
+          <button onClick={()=>handleButton('rent')} className="text-white focus:ring">En alquiler</button>
           {user.name ? (
             <>
 

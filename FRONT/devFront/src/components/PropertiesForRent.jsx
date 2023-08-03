@@ -55,7 +55,7 @@ try {
   return (
     <div className="w-screen h-screen ">
       <CustomerSearch/>
-            <h1 className="text-blue-800 text-3xl font-bold mt-10 ml-48 border-2 border-indigo-600 mr-48 ">Propiedades en alquiler</h1>
+            <h1 id='rent' className="text-blue-800 text-3xl font-bold mt-10 ml-48 border-2 border-indigo-600 mr-48 ">Propiedades en alquiler</h1>
 <section className="w-fit mx-auto grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 justify-items-center justify-center gap-y-20 gap-x-14 mt-10 mb-5 p-0">
 {propertiesForRent?.map((property,index)=>(
 <Fragment key={index}>

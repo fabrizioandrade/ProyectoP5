@@ -24,6 +24,7 @@ function App() {
   const user = useSelector((state) => state.user); 
   const [isUserVerified, setIsUserVerified] = useState(false);
   const showNavbar = location.pathname !== '/' && location.pathname !== '/update'
+  const button=useSelector((state)=>state.buttons)
   useEffect(() => {
     if (user.role === 'admin') {
       setIsUserVerified(true);
@@ -34,10 +35,26 @@ function App() {
   }, [user]);
  
   useEffect(() => {
-    if (location.pathname === "/home") {
+    const buttonToRoute = {
+      sale: '/home/forSale',
+      rent: '/home/forRent',
+      // Agrega aquí más botones y sus rutas correspondientes
+    };
+
+    const scrollToElement = (button) => {
+      const route = buttonToRoute[button];
+      if (location.pathname === route) {
+        const element = document.getElementById(button);
+        element?.scrollIntoView({ behavior: 'smooth' });
+      }
+    };
+
+    if (button) {
+      scrollToElement(button);
+    } else if (location.pathname === '/home') {
       window.scrollTo(0, 0);
     }
-  }, [location.pathname]);
+  }, [button, location.pathname]);
 
 
 
