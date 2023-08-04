@@ -133,10 +133,9 @@ const PropertyCard = () => {
                   </>
                 ) : null}
               </ul>
-            </div>
             {user.role !== "admin" && (
-              <div className="property-contact">
-                <form onSubmit={handleSubmit}>
+              <div className="property-contact flex justify-center ">
+                <form  onSubmit={handleSubmit}>
                   <input
                     type="date"
                     required
@@ -153,7 +152,10 @@ const PropertyCard = () => {
                   </button>
                 </form>
               </div>
+
             )}
+                                      </div>
+
           </div>
         </>
       ) : (

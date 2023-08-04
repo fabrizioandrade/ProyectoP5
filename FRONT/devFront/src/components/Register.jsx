@@ -7,20 +7,12 @@ const Register = ({ toggleAuthComponent }) => {
   const [password, setPassword] = useState("");
   const [confirmedPassword, setConfirmedPasword] = useState("");
   const [phone, setPhone] = useState("");
-  const [isAdminCode, setIsAdminCode] = useState(false);
-  const [adminCode, setAdminCode] = useState("");
 
   //Crear funciones
   const namePattern = /^[a-zA-Z\s]+$/; // Solo letras y espacios
   const phonePattern = /^\d+$/;
 
-  const handleAdminCode = (e) => {
-    setAdminCode(e.target.value);
-  };
 
-  const handleAdminCodeToggle = () => {
-    setIsAdminCode(!isAdminCode);
-  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -31,11 +23,10 @@ const Register = ({ toggleAuthComponent }) => {
           password: password,
           email: email,
           phone: phone,
-          code: adminCode,
+          code: '',
         })
         .then((res) => {
           const { success, message } = res.data;
-          console.log(res.data);
           if (success) {
             alert(message);
             toggleAuthComponent();
@@ -55,10 +46,10 @@ const Register = ({ toggleAuthComponent }) => {
         <div className="flex flex-col items-center justify-center px-6 pb-8 lg:py-0">
           <a className="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
             <img className="w-8 h-8 mr-2" src={logo} alt="logo" />
-            devHouse
+            DevHouse
           </a>
           <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
-            <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
+            <div className="p-6 space-y-4 md:space-y-4 sm:p-4">
               <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                 Registrarse
               </h1>
@@ -160,30 +151,7 @@ const Register = ({ toggleAuthComponent }) => {
                     title="Por favor ingresa un número válido"
                   />
                 </div>
-                <div>
-                  <label htmlFor="admin-code">Do you have an admin code?</label>
-                  <input
-                    type="checkbox"
-                    id="admin-code"
-                    checked={isAdminCode}
-                    onChange={handleAdminCodeToggle}
-                  />
-                </div>
-                {isAdminCode && (
-                  <div>
-                    <label htmlFor="admin-code-input">Admin Code:</label>
-                    <input
-                      type="text"
-                      className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                      id="admin-code-input"
-                      placeholder="admin code"
-                      value={adminCode}
-                      onChange={handleAdminCode}
-                      required
-                    />
-                  </div>
-                )}
-                <div className="flex items-start">
+                              <div className="flex items-start">
                   <div className="flex items-center h-5">
                     <input
                       id="terms"

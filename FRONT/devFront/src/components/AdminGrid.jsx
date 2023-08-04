@@ -147,7 +147,7 @@ const AdminGrid = ({fetchData}) => {
                       </svg>
                     </button>
                     </>
-                    ):(<button>hola</button>)}
+                    ):(<></>)}
                     
                     
                   </div>

@@ -51,7 +51,6 @@ const PropertiesGrid = () => {
         credentials: "include",
       })
       dispatch(setFavorites(response2.data.validFavorites))
-      console.log(favorites);
       alert(response.data.message);
     } catch (error) {
       console.log("ocurrio un error al agregar a favoritos", error);
